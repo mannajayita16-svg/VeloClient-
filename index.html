@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeloClient - Onboard Clients in Minutes</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#0b0f19] text-white font-sans antialiased selection:bg-indigo-500 selection:text-white">
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto border-b border-gray-800/60">
+        <div class="flex items-center gap-2">
+            <div class="bg-indigo-600 p-2 rounded-xl flex items-center justify-center text-white font-bold"><i class="fa-solid fa-bolt"></i></div>
+            <span class="text-xl font-bold tracking-tight">Velo<span class="text-indigo-400 font-normal">Client</span></span>
+        </div>
+        <div class="hidden md:flex items-center gap-8 text-sm text-gray-300">
+            <a href="index.html" class="text-white font-medium">Home</a>
+            <a href="#features" class="hover:text-white transition">Features</a>
+            <a href="pricing.html" class="hover:text-white transition">Pricing</a>
+            <a href="#" class="hover:text-white transition">Testimonials</a>
+            <a href="#" class="hover:text-white transition">FAQ</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="dashboard.html" class="text-sm font-medium hover:text-indigo-400 transition hidden sm:inline">Sign In</a>
+            <a href="pricing.html" class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 rounded-xl transition shadow-lg shadow-indigo-600/30">Get Started Free</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-6 pt-16 pb-24 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <div class="inline-flex items-center gap-2 bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-full text-xs font-medium text-indigo-300 mb-6">
+                <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span> Built for US Digital & Creative Agencies
+            </div>
+            <h1 class="text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                Onboard Clients in <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">Minutes, Not Hours.</span>
+            </h1>
+            <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                VeloClient automates your client intake and audit process — so you can get the assets, access, and approvals you need, without the messy email threads.
+            </p>
+            
+            <div class="flex flex-wrap gap-4 items-center mb-12">
+                <a href="pricing.html" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3.5 rounded-xl transition shadow-xl shadow-indigo-600/30 flex items-center gap-2">
+                    Get Started Now <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+                <a href="#" class="border border-gray-800 hover:bg-gray-900 text-gray-300 font-medium px-6 py-3.5 rounded-xl transition flex items-center gap-2">
+                    <i class="fa-regular fa-circle-play text-indigo-400"></i> Watch Demo
+                </a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-gray-800/80 text-xs text-gray-400">
+                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> Save 5-10 hours per new client</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> Auto-detect missing assets</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> Secure & organized client data</div>
+            </div>
+        </div>
+
+        <!-- Hero Graphic Mockup -->
+        <div class="relative">
+            <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl blur-xl opacity-20"></div>
+            <div class="relative bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-2xl">
+                <div class="flex items-center justify-between pb-3 border-b border-gray-800 mb-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                    </div>
+                    <span class="text-xs text-gray-500 font-mono">dashboard.veloclient.com</span>
+                </div>
+                <div class="space-y-3">
+                    <div class="bg-indigo-950/40 border border-indigo-900/50 rounded-xl p-3 flex justify-between items-center">
+                        <div>
+                            <p class="text-xs text-indigo-300 font-medium">Total Clients</p>
+                            <p class="text-xl font-bold">4 <span class="text-xs text-green-400 font-normal">+2 this month</span></p>
+                        </div>
+                        <div class="bg-indigo-600/20 text-indigo-400 p-2 rounded-lg"><i class="fa-solid fa-users"></i></div>
+                    </div>
+                    <div class="bg-gray-800/50 rounded-xl p-3 flex justify-between items-center text-sm">
+                        <span class="text-gray-300">BrightWave Media Website Redesign</span>
+                        <span class="text-xs bg-indigo-500/20 text-indigo-400 px-2 py-1 rounded-md">In Progress</span>
+                    </div>
+                    <div class="bg-gray-800/50 rounded-xl p-3 flex justify-between items-center text-sm">
+                        <span class="text-gray-300">Lumen Creative Brand Identity</span>
+                        <span class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-md">Completed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By -->
+    <section class="border-y border-gray-800/60 bg-gray-950/50 py-8">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-xs text-gray-500 uppercase tracking-widest mb-6">Trusted by 1000+ agencies worldwide</p>
+            <div class="flex flex-wrap justify-center gap-12 text-gray-400 font-semibold text-sm">
+                <div class="flex items-center gap-2"><i class="fa-solid fa-layer-group text-indigo-400"></i> Elevate Creative</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-bolt text-indigo-400"></i> Brightside Media</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-globe text-indigo-400"></i> Nexa Digital</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-shapes text-indigo-400"></i> Pixel Forge</div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-cube text-indigo-400"></i> Studio Arc</div>
+            </div>
+        </div>
+    </section>
+</body>
+                  </html>
+                  
