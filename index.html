@@ -6,11 +6,10 @@
     <title>VeloClient - Onboard Clients in Minutes, Not Hours</title>
     <link rel="icon" type="image/svg+xml" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/bolt.svg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #090c10; }
         .hero-bg {
             background: linear-gradient(to bottom, rgba(9, 12, 16, 0.7), rgba(9, 12, 16, 0.95)), 
                         url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
@@ -22,208 +21,134 @@
         }
     </style>
 </head>
-<body class="bg-[#090c10] text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
-    <div>
-        <!-- Navbar -->
-        <nav class="sticky top-0 z-50 backdrop-blur-2xl bg-[#090c10]/90 border-b border-slate-800">
-            <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <span class="text-2xl font-extrabold tracking-tight text-white">Velo<span class="text-amber-500 font-normal">Client</span></span>
-                </div>
-                <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
-                    <a href="index.html" class="text-amber-400 font-semibold">Home</a>
-                    <a href="pricing.html" class="hover:text-amber-400 transition">Pricing</a>
-                    <a href="dashboard.html" class="hover:text-amber-400 transition">Dashboard</a>
-                    <button onclick="logout()" class="hover:text-amber-400 transition cursor-pointer">Sign Out</button>
-                </div>
-                <div class="flex items-center gap-4">
-                    <span id="user-email-display" class="text-xs text-amber-400 font-bold bg-[#161d2d] px-4 py-2 rounded-xl border border-slate-800">Verifying session...</span>
-                </div>
-            </div>
-        </nav>
+<body class="text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
 
-        <!-- Full-Page Immersive Hero Section -->
-        <section class="hero-bg min-h-[85vh] flex items-center relative overflow-hidden py-24 px-8">
-            <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center w-full">
-                <div class="lg:col-span-7 space-y-8">
-                    <div class="inline-flex items-center gap-2 bg-[#141a29] border border-amber-500/30 px-4 py-2 rounded-full text-xs font-semibold text-amber-300 shadow-xl">
-                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                        <span>Active Enterprise Session Memorized</span>
-                    </div>
-                    
-                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-                        Onboard Clients <br>in Minutes, <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Not Hours.</span>
-                    </h1>
-                    
-                    <p class="text-slate-300 text-lg lg:text-xl max-w-2xl leading-relaxed font-normal">
-                        VeloClient automates your corporate client intake and audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict NDA standards.
-                    </p>
-                    
-                    <div class="flex flex-wrap gap-5 items-center pt-4">
-                        <a href="pricing.html" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-8 py-4 rounded-xl transition shadow-2xl shadow-amber-900/40 flex items-center gap-3 text-base">
-                            View Pricing Options <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                        <a href="dashboard.html" class="border border-slate-700 bg-[#111622] hover:bg-[#161d2d] text-slate-200 font-semibold px-8 py-4 rounded-xl transition flex items-center gap-3 text-base">
-                            <i class="fa-solid fa-chart-pie text-amber-400"></i> Open Dashboard
-                        </a>
-                    </div>
-                </div>
+    <!-- ================= AUTHENTICATION OVERLAY (Shown if NOT logged in) ================= -->
+    <div id="auth-overlay" class="fixed inset-0 z-50 bg-[#090c10] flex items-center justify-center p-6 hidden">
+        <div class="bg-[#111622] border border-amber-500/20 rounded-3xl p-10 max-w-md w-full shadow-2xl relative">
+            <div class="text-center mb-8">
+                <span class="inline-block text-3xl font-extrabold text-white tracking-tight">Velo<span class="text-amber-500">Client</span></span>
+                <p class="text-xs text-slate-400 mt-2">Secure Enterprise Client Portal</p>
+            </div>
 
-                <!-- Visual Mockup Column -->
-                <div class="lg:col-span-5 relative">
-                    <div class="absolute -inset-6 bg-gradient-to-tr from-amber-600/10 to-transparent rounded-3xl blur-3xl"></div>
-                    <div class="luxury-card rounded-3xl p-6 shadow-2xl relative border border-amber-500/20 space-y-5">
-                        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Enterprise Portal</span>
-                            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Active & Secure</span>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-                                <div><p class="text-xs text-slate-400">Corporate Client</p><p class="text-base font-bold text-white">Stark Industries</p></div>
-                                <span class="text-xs text-emerald-400 font-bold bg-emerald-950/50 px-3 py-1 rounded-lg">Verified</span>
-                            </div>
-                            <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-                                <div><p class="text-xs text-slate-400">Asset Audit Status</p><p class="text-base font-bold text-amber-400">100% Complete</p></div>
-                                <i class="fa-solid fa-shield-check text-amber-400 text-xl"></i>
-                            </div>
-                        </div>
-                    </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1.5">Corporate Email</label>
+                    <input type="email" id="email-input" placeholder="name@enterprise.com" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 font-medium" required>
                 </div>
-            </div>
-        </section>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1.5">Secure Password</label>
+                    <input type="password" id="password-input" placeholder="At least 6 characters" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
+                </div>
+                <button type="submit" class="w-full mt-4 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
+                    Sign In to Workspace
+                </button>
+            </form>
 
-        <!-- Aesthetic Gallery Showcase Section -->
-        <section class="py-20 bg-[#07090f] border-t border-slate-800/80 px-8">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-4xl font-extrabold tracking-tight text-white">Engineered for World-Class Operations</h2>
-                    <p class="text-slate-400 text-base mt-3">Designed with timeless elegance to command high corporate respect from US and global enterprises.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" alt="Executive Workspace" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
-                            <div><p class="text-base font-bold text-white">Executive Control</p><p class="text-xs text-slate-400 mt-1">Manage global accounts with absolute clarity.</p></div>
-                        </div>
-                    </div>
-                    <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
-                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop" alt="Financial Security" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
-                            <div><p class="text-base font-bold text-white">Bank-Grade Privacy</p><p class="text-xs text-slate-400 mt-1">Secure escrow storage and encrypted asset transfers.</p></div>
-                        </div>
-                    </div>
-                    <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&auto=format&fit=crop" alt="Corporate Growth" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
-                            <div><p class="text-base font-bold text-white">Rapid Scaling</p><p class="text-xs text-slate-400 mt-1">Accelerate multi-million dollar client onboarding cycles.</p></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Embedded AI FAQ Chatbot Widget in Bottom Corner -->
-    <div class="fixed bottom-6 right-6 z-50">
-        <div id="chat-window" class="hidden bg-[#111622] border border-amber-500/30 rounded-3xl w-80 shadow-2xl overflow-hidden mb-4 flex flex-col">
-            <div class="bg-[#161d2d] p-4 border-b border-slate-800 flex justify-between items-center">
-                <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div><span class="text-xs font-bold text-white">VeloClient AI Assistant</span></div>
-                <button onclick="toggleChat()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div id="chat-messages" class="p-4 space-y-3 h-64 overflow-y-auto text-xs text-slate-300">
-                <div class="bg-[#161d2d] p-3 rounded-xl border border-slate-800">Hello! Ask me anything about VeloClient pricing, security, or onboarding features.</div>
-            </div>
-            <div class="p-3 border-t border-slate-800 bg-[#090c10] flex gap-2">
-                <input type="text" id="chat-input" placeholder="Ask a question..." class="w-full bg-[#111622] border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
-                <button onclick="sendChatMessage()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-xl text-xs font-bold">Send</button>
-            </div>
+            <p class="text-center text-[11px] text-slate-500 mt-6">
+                Secured Portal &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
+            </p>
         </div>
-        <button onclick="toggleChat()" class="bg-amber-600 hover:bg-amber-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-xl transition transform hover:scale-105">
-            <i class="fa-solid fa-comment-dots"></i>
-        </button>
     </div>
 
-    <script>
-        const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    <!-- ================= MAIN WEBSITE CONTENT (Revealed when logged in) ================= -->
+    <div id="main-content" class="flex flex-col justify-between min-h-screen hidden">
+        <div>
+            <!-- Navbar -->
+            <nav class="sticky top-0 z-40 backdrop-blur-2xl bg-[#090c10]/90 border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl font-extrabold tracking-tight text-white">Velo<span class="text-amber-500 font-normal">Client</span></span>
+                    </div>
+                    <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
+                        <a href="#home" class="text-amber-400 font-semibold">Home</a>
+                        <a href="#pricing" class="hover:text-amber-400 transition">Pricing</a>
+                        <button onclick="logout()" class="hover:text-amber-400 transition cursor-pointer">Sign Out</button>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span id="user-email-display" class="text-xs text-amber-400 font-bold bg-[#161d2d] px-4 py-2 rounded-xl border border-slate-800">User</span>
+                    </div>
+                </div>
+            </nav>
 
-        async function checkSession() {
-            const { data: { session } } = await supabaseClient.auth.getSession();
-            if (!session) {
-                window.location.href = 'auth.html';
+            <!-- Hero Section -->
+            <section id="home" class="hero-bg min-h-[85vh] flex items-center relative overflow-hidden py-24 px-8">
+                <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center w-full">
+                    <div class="lg:col-span-7 space-y-8">
+                        <div class="inline-flex items-center gap-2 bg-[#141a29] border border-amber-500/30 px-4 py-2 rounded-full text-xs font-semibold text-amber-300 shadow-xl">
+                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                            <span>Active Enterprise Session Secured</span>
+                        </div>
+                        
+                        <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+                            Onboard Clients <br>in Minutes, <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Not Hours.</span>
+                        </h1>
+                        
+                        <p class="text-slate-300 text-lg lg:text-xl max-w-2xl leading-relaxed font-normal">
+                            VeloClient automates your corporate client intake and audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict standards.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#07090f] border-t border-slate-800 py-8 text-center text-xs text-slate-500">
+            &copy; VeloClient Protocol. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- ================= BULLETPROOF APP CONTROLLER SCRIPT ================= -->
+    <script>
+        // Check session immediately on load
+        function checkAppSession() {
+            const auth = localStorage.getItem('veloclient_auth');
+            const email = localStorage.getItem('veloclient_user_email');
+            
+            const overlay = document.getElementById('auth-overlay');
+            const mainContent = document.getElementById('main-content');
+            const emailDisplay = document.getElementById('user-email-display');
+
+            if (auth === 'active' && email) {
+                // User is logged in: Hide login box, show main website
+                overlay.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                if (emailDisplay) emailDisplay.innerText = email;
             } else {
-                document.getElementById('user-email-display').innerText = session.user.email;
+                // User is NOT logged in: Show login box, hide website
+                mainContent.classList.add('hidden');
+                overlay.classList.remove('hidden');
             }
         }
 
-        async function logout() {
-            await supabaseClient.auth.signOut();
-            window.location.href = 'auth.html';
+        // Handle login form submission without page redirects
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('email-input').value.trim();
+            const password = document.getElementById('password-input').value.trim();
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return;
+            }
+
+            // Permanently store session
+            localStorage.setItem('veloclient_user_email', email);
+            localStorage.setItem('veloclient_auth', 'active');
+
+            // Instantly reveal the app without refreshing or redirecting
+            checkAppSession();
         }
 
-        function toggleChat() {
-            const win = document.getElementById('chat-window');
-            win.classList.toggle('hidden');
+        // Logout function clears storage and shows login box instantly
+        function logout() {
+            localStorage.removeItem('veloclient_auth');
+            localStorage.removeItem('veloclient_user_email');
+            checkAppSession();
         }
 
-        function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const msgContainer = document.getElementById('chat-messages');
-            if(!input.value.trim()) return;
-            
-            const userMsg = document.createElement('div');
-            userMsg.className = "bg-amber-600/20 text-amber-200 p-3 rounded-xl ml-auto max-w-[80%] border border-amber-500/20";
-            userMsg.innerText = input.value;
-            msgContainer.appendChild(userMsg);
-            
-            const txt = input.value.toLowerCase();
-            input.value = '';
-            
-            setTimeout(() => {
-                const aiMsg = document.createElement('div');
-                aiMsg.className = "bg-[#161d2d] p-3 rounded-xl border border-slate-800 text-slate-300";
-                if(txt.includes('price') || txt.includes('cost')) {
-                    aiMsg.innerText = "VeloClient Pro is available as a one-time lifetime investment of $10,000 (90% off $100,000) or $199/month.";
-                } else if(txt.includes('security') || txt.includes('safe')) {
-                    aiImg.innerText = "We use bank-grade 256-bit SSL encryption and strict NDA compliance standards for all client data.";
-                } else {
-                    aiMsg.innerText = "That's a great question! For custom enterprise inquiries, please reach out directly to anikmanna697@gmail.com.";
-                }
-                msgContainer.appendChild(aiMsg);
-                msgContainer.scrollTop = msgContainer.scrollHeight;
-            }, 500);
-        }
-
-        checkSession();
+        // Run check immediately when file opens
+        checkAppSession();
     </script>
-</body>    <!-- Your existing HTML content here -->
-
-    <script>
-    // Load user email into the navbar if they are logged in
-    window.addEventListener('DOMContentLoaded', () => {
-        const authStatus = localStorage.getItem('veloclient_auth');
-        const userEmail = localStorage.getItem('veloclient_user_email');
-        const displayEl = document.getElementById('user-email-display');
-
-        if (authStatus === 'active' && userEmail) {
-            if (displayEl) {
-                displayEl.innerText = userEmail;
-            }
-        } else {
-            if (displayEl) {
-                displayEl.innerHTML = '<a href="auth.html" class="text-amber-400 hover:underline">Sign In</a>';
-            }
-        }
-    });
-
-    // Global Logout Function
-    function logout() {
-        localStorage.removeItem('veloclient_auth');
-        localStorage.removeItem('veloclient_user_email');
-        window.location.href = 'auth.html';
-    }
-        </script>
-    
+</body>
 </html>
-        
