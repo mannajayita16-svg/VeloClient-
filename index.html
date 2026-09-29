@@ -200,27 +200,36 @@
 </body>    <!-- Your existing HTML content here -->
 
     <script>
-        // Check local persistent session
-        const savedEmail = localStorage.getItem('veloclient_user_email');
-        const isAuthenticated = localStorage.getItem('veloclient_authenticated');
+    // 1. Check if an email was passed in the URL from auth.html
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlEmail = urlParams.get('email');
 
-        if (!isAuthenticated || !savedEmail) {
-            // If not authenticated, send them back to the sign-in page
-            window.location.href = 'auth.html';
-        } else {
-            // Display the user's email correctly in the navbar
-            const emailDisplay = document.getElementById('user-email-display');
-            if (emailDisplay) emailDisplay.innerText = savedEmail;
-        }
+    if (urlEmail) {
+        // If passed from login, save it permanently into browser storage
+        localStorage.setItem('veloclient_user_email', urlEmail);
+        localStorage.setItem('veloclient_authenticated', 'true');
+    }
 
-        function logout() {
-            localStorage.removeItem('veloclient_authenticated');
-            localStorage.removeItem('veloclient_user_email');
-            window.location.href = 'auth.html';
+    // 2. Check local persistent session
+    const savedEmail = localStorage.getItem('veloclient_user_email');
+    const isAuthenticated = localStorage.getItem('veloclient_authenticated');
+
+    if (!isAuthenticated || !savedEmail) {
+        // Only bounce back to auth if there is genuinely no session and no URL email
+        window.location.href = 'auth.html';
+    } else {
+        // Display the user's email correctly in the navbar
+        const emailDisplay = document.getElementById('user-email-display');
+        if (emailDisplay) {
+            emailDisplay.innerText = savedEmail;
         }
+    }
+
+    // 3. Logout function
+    function logout() {
+        localStorage.removeItem('veloclient_authenticated');
+        localStorage.removeItem('veloclient_user_email');
+        window.location.href = 'auth.html';
+    }
     </script>
-</body>
-</html>
-
-                
-                
+</html> 
