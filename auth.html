@@ -21,16 +21,16 @@
 
         <!-- SSO Sign-In Buttons -->
         <div class="space-y-3 mb-6">
-            <button type="button" onclick="openGoogleAccountModal()" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
+            <button type="button" onclick="openAuthModal('Google')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
                 <i class="fa-brands fa-google text-amber-400 text-sm"></i> Sign in with Google
             </button>
-            <button type="button" onclick="handleSSOLogin('Apple')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
+            <button type="button" onclick="openAuthModal('Apple')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
                 <i class="fa-brands fa-apple text-white text-sm"></i> Sign in with Apple
             </button>
-            <button type="button" onclick="handleSSOLogin('LinkedIn')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
+            <button type="button" onclick="openAuthModal('LinkedIn')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
                 <i class="fa-brands fa-linkedin text-blue-400 text-sm"></i> Sign in with LinkedIn
             </button>
-            <button type="button" onclick="handleSSOLogin('Twitter')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
+            <button type="button" onclick="openAuthModal('Twitter')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
                 <i class="fa-brands fa-x-twitter text-slate-200 text-sm"></i> Sign in with X (Twitter)
             </button>
         </div>
@@ -54,7 +54,7 @@
                 </div>
                 <input type="password" id="password-input" placeholder="••••••••••••" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
             </div>
-            <button type="submit" id="submit-btn" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide">
+            <button type="submit" id="submit-btn" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
                 Sign In to Workspace
             </button>
         </form>
@@ -64,80 +64,70 @@
         </p>
     </div>
 
-    <!-- Authentic Google Account Selection Modal -->
-    <div id="google-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <!-- True Interactive Authentication Authorization Popup Modal -->
+    <div id="auth-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-[#111622] border border-slate-700 rounded-3xl p-8 max-w-sm w-full shadow-2xl space-y-6 text-center animate-in fade-in zoom-in duration-200">
-            <div class="flex flex-col items-center gap-2">
-                <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md">
-                    <i class="fa-brands fa-google text-blue-600 text-xl"></i>
-                </div>
-                <h3 class="text-lg font-bold text-white mt-1">Choose an account</h3>
-                <p class="text-xs text-slate-400">to continue to VeloClient Enterprise</p>
+            <div id="modal-content" class="space-y-4">
+                <!-- Dynamically populated provider verification screen -->
             </div>
-
-            <!-- List of Client Accounts to Select From -->
-            <div class="space-y-2.5 text-left">
-                <div onclick="selectGoogleAccount('Anik Manna', 'anikmanna697@gmail.com')" class="flex items-center gap-3 p-3 rounded-2xl bg-[#161d2d] hover:bg-[#1f293d] border border-slate-700 cursor-pointer transition">
-                    <div class="w-9 h-9 rounded-full bg-amber-600 text-white font-bold flex items-center justify-center text-xs">AM</div>
-                    <div class="overflow-hidden">
-                        <p class="text-xs font-bold text-white">Anik Manna</p>
-                        <p class="text-[10px] text-slate-400 truncate">anikmanna697@gmail.com</p>
-                    </div>
-                </div>
-
-                <div onclick="selectGoogleAccount('Jayita Kole', 'jayita5628@gmail.com')" class="flex items-center gap-3 p-3 rounded-2xl bg-[#161d2d] hover:bg-[#1f293d] border border-slate-700 cursor-pointer transition">
-                    <div class="w-9 h-9 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-xs">JK</div>
-                    <div class="overflow-hidden">
-                        <p class="text-xs font-bold text-white">Jayita Kole</p>
-                        <p class="text-[10px] text-slate-400 truncate">jayita5628@gmail.com</p>
-                    </div>
-                </div>
-
-                <div onclick="selectGoogleAccount('Corporate Partner', 'partner@enterprise.com')" class="flex items-center gap-3 p-3 rounded-2xl bg-[#161d2d] hover:bg-[#1f293d] border border-slate-700 cursor-pointer transition">
-                    <div class="w-9 h-9 rounded-full bg-slate-700 text-white font-bold flex items-center justify-center text-xs">CP</div>
-                    <div class="overflow-hidden">
-                        <p class="text-xs font-bold text-white">Corporate Partner</p>
-                        <p class="text-[10px] text-slate-400 truncate">partner@enterprise.com</p>
-                    </div>
-                </div>
-            </div>
-
-            <button onclick="closeGoogleAccountModal()" class="text-xs text-slate-400 hover:text-white transition">Cancel</button>
         </div>
     </div>
 
     <script>
-        function openGoogleAccountModal() {
-            document.getElementById('google-modal').classList.remove('hidden');
+        function openAuthModal(provider) {
+            const modal = document.getElementById('auth-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+
+            let iconClass = "fa-brands fa-google text-blue-500";
+            let brandColor = "text-amber-400";
+            if(provider === 'Apple') { iconClass = "fa-brands fa-apple text-white"; }
+            else if(provider === 'LinkedIn') { iconClass = "fa-brands fa-linkedin text-blue-400"; }
+            else if(provider === 'Twitter') { iconClass = "fa-brands fa-x-twitter text-slate-200"; }
+
+            content.innerHTML = `
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-12 h-12 rounded-full bg-[#161d2d] border border-slate-700 flex items-center justify-center text-xl shadow-md">
+                        <i class="${iconClass}"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mt-1">Sign in with ${provider}</h3>
+                    <p class="text-xs text-slate-400">VeloClient requests permission to verify your corporate account.</p>
+                </div>
+
+                <div class="bg-[#161d2d] border border-slate-700 rounded-2xl p-4 text-left space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-600 text-white font-bold flex items-center justify-center text-xs">AM</div>
+                        <div class="overflow-hidden">
+                            <p class="text-xs font-bold text-white">Anik Manna</p>
+                            <p class="text-[10px] text-slate-400 truncate">anikmanna697@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button onclick="closeAuthModal()" class="w-1/2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold py-3 rounded-xl transition">Cancel</button>
+                    <button onclick="confirmAuth('${provider}')" class="w-1/2 bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold py-3 rounded-xl transition shadow-md">Authorize</button>
+                </div>
+            `;
         }
 
-        function closeGoogleAccountModal() {
-            document.getElementById('google-modal').classList.add('hidden');
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
         }
 
-        function selectGoogleAccount(name, email) {
-            const modalBox = document.querySelector('#google-modal > div');
-            modalBox.innerHTML = `
+        function confirmAuth(provider) {
+            const content = document.getElementById('modal-content');
+            content.innerHTML = `
                 <div class="py-8 space-y-4 text-center">
                     <i class="fa-solid fa-spinner fa-spin text-amber-400 text-3xl"></i>
-                    <p class="text-sm font-bold text-white">Authenticating as ${name}...</p>
-                    <p class="text-xs text-slate-400">${email}</p>
+                    <p class="text-sm font-bold text-white">Authenticating via ${provider} OAuth...</p>
+                    <p class="text-xs text-slate-400">Establishing secure session handshake</p>
                 </div>
             `;
 
             setTimeout(() => {
-                window.location.href = `dashboard.html?demo=true&user=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
-            }, 1000);
-        }
-
-        function handleSSOLogin(provider) {
-            const btn = event.currentTarget;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-amber-400 mr-2"></i> Connecting to ${provider}...`;
-            btn.disabled = true;
-
-            setTimeout(() => {
-                window.location.href = 'dashboard.html?demo=true';
-            }, 1000);
+                window.location.href = `dashboard.html?demo=true&auth=${provider.toLowerCase()}`;
+            }, 1200);
         }
 
         function handleEmailLogin(event) {
@@ -147,7 +137,7 @@
             const submitBtn = document.getElementById('submit-btn');
 
             if(email && password) {
-                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Verifying Credentials...`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Verifying Corporate Credentials...`;
                 submitBtn.disabled = true;
 
                 setTimeout(() => {
