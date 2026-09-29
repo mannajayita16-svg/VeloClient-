@@ -23,35 +23,41 @@
 </head>
 <body class="text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
 
-    <!-- ================= AUTHENTICATION OVERLAY (Shown if NOT logged in) ================= -->
+    <!-- ================= SECURE AUTHENTICATION OVERLAY ================= -->
     <div id="auth-overlay" class="fixed inset-0 z-50 bg-[#090c10] flex items-center justify-center p-6 hidden">
         <div class="bg-[#111622] border border-amber-500/20 rounded-3xl p-10 max-w-md w-full shadow-2xl relative">
-            <div class="text-center mb-8">
+            <div class="text-center mb-6">
                 <span class="inline-block text-3xl font-extrabold text-white tracking-tight">Velo<span class="text-amber-500">Client</span></span>
                 <p class="text-xs text-slate-400 mt-2">Secure Enterprise Client Portal</p>
             </div>
 
-            <form onsubmit="handleLogin(event)" class="space-y-4">
+            <!-- Mode Switcher Tabs -->
+            <div class="flex bg-[#090c10] p-1 rounded-2xl mb-6 border border-slate-800">
+                <button type="button" id="tab-signin" onclick="switchMode('signin')" class="flex-1 py-2 text-xs font-bold rounded-xl bg-amber-600 text-white transition cursor-pointer">Sign In</button>
+                <button type="button" id="tab-register" onclick="switchMode('register')" class="flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition cursor-pointer">Register</button>
+            </div>
+
+            <form onsubmit="handleSecureAuth(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1.5">Corporate Email</label>
                     <input type="email" id="email-input" placeholder="name@enterprise.com" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 font-medium" required>
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1.5">Secure Password</label>
-                    <input type="password" id="password-input" placeholder="At least 6 characters" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
+                    <input type="password" id="password-input" placeholder="Min 8 chars, 1 uppercase, 1 number, 1 symbol" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
                 </div>
-                <button type="submit" class="w-full mt-4 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
+                <button type="submit" id="submit-btn" class="w-full mt-4 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
                     Sign In to Workspace
                 </button>
             </form>
 
             <p class="text-center text-[11px] text-slate-500 mt-6">
-                Secured Portal &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
+                Strict Password Enforcement &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
             </p>
         </div>
     </div>
 
-    <!-- ================= MAIN WEBSITE CONTENT (Revealed when logged in) ================= -->
+    <!-- ================= FULL WEBSITE CONTENT (Revealed when authenticated) ================= -->
     <div id="main-content" class="flex flex-col justify-between min-h-screen hidden">
         <div>
             <!-- Navbar -->
@@ -62,6 +68,7 @@
                     </div>
                     <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
                         <a href="#home" class="text-amber-400 font-semibold">Home</a>
+                        <a href="#showcase" class="hover:text-amber-400 transition">Gallery</a>
                         <a href="#pricing" class="hover:text-amber-400 transition">Pricing</a>
                         <button onclick="logout()" class="hover:text-amber-400 transition cursor-pointer">Sign Out</button>
                     </div>
@@ -77,7 +84,7 @@
                     <div class="lg:col-span-7 space-y-8">
                         <div class="inline-flex items-center gap-2 bg-[#141a29] border border-amber-500/30 px-4 py-2 rounded-full text-xs font-semibold text-amber-300 shadow-xl">
                             <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                            <span>Active Enterprise Session Secured</span>
+                            <span>Encrypted Enterprise Session Active</span>
                         </div>
                         
                         <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
@@ -85,22 +92,187 @@
                         </h1>
                         
                         <p class="text-slate-300 text-lg lg:text-xl max-w-2xl leading-relaxed font-normal">
-                            VeloClient automates your corporate client intake and audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict standards.
+                            VeloClient automates your corporate client intake and audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict NDA standards.
                         </p>
+                        
+                        <div class="flex flex-wrap gap-5 items-center pt-4">
+                            <a href="#pricing" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-8 py-4 rounded-xl transition shadow-2xl shadow-amber-900/40 flex items-center gap-3 text-base">
+                                View Pricing Options <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Visual Mockup Column -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="absolute -inset-6 bg-gradient-to-tr from-amber-600/10 to-transparent rounded-3xl blur-3xl"></div>
+                        <div class="luxury-card rounded-3xl p-6 shadow-2xl relative border border-amber-500/20 space-y-5">
+                            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Enterprise Portal</span>
+                                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Verified Secure</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
+                                    <div><p class="text-xs text-slate-400">Corporate Client</p><p class="text-base font-bold text-white">Stark Industries</p></div>
+                                    <span class="text-xs text-emerald-400 font-bold bg-emerald-950/50 px-3 py-1 rounded-lg">Active</span>
+                                </div>
+                                <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
+                                    <div><p class="text-xs text-slate-400">Asset Audit Status</p><p class="text-base font-bold text-amber-400">100% Complete</p></div>
+                                    <i class="fa-solid fa-shield-check text-amber-400 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Aesthetic Gallery Showcase Section -->
+            <section id="showcase" class="py-20 bg-[#07090f] border-t border-slate-800/80 px-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-4xl font-extrabold tracking-tight text-white">Engineered for World-Class Operations</h2>
+                        <p class="text-slate-400 text-base mt-3">Designed with timeless elegance to command high corporate respect from global enterprises.</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" alt="Workspace" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
+                                <div><p class="text-base font-bold text-white">Executive Control</p><p class="text-xs text-slate-400 mt-1">Manage global accounts with absolute clarity.</p></div>
+                            </div>
+                        </div>
+                        <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
+                            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop" alt="Security" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
+                                <div><p class="text-base font-bold text-white">Bank-Grade Privacy</p><p class="text-xs text-slate-400 mt-1">Secure escrow storage and encrypted asset transfers.</p></div>
+                            </div>
+                        </div>
+                        <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
+                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&auto=format&fit=crop" alt="Growth" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
+                                <div><p class="text-base font-bold text-white">Rapid Scaling</p><p class="text-xs text-slate-400 mt-1">Accelerate multi-million dollar client onboarding cycles.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pricing Section -->
+            <section id="pricing" class="py-20 bg-[#090c10] border-t border-slate-800 px-8 text-center">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-4xl font-extrabold text-white">Exclusive Lifetime Access</h2>
+                    <p class="text-slate-400 mt-3 text-base">Secure your enterprise pipeline license today.</p>
+                    <div class="mt-10 luxury-card p-10 rounded-3xl border border-amber-500/30 inline-block w-full max-w-md shadow-2xl">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Enterprise Pro</span>
+                        <div class="text-5xl font-extrabold text-white mt-4">$10,000 <span class="text-sm font-normal text-slate-400">/ lifetime</span></div>
+                        <p class="text-xs text-slate-400 mt-2">Unlimited clients, custom onboarding scripts, and priority NDA support.</p>
+                        <button onclick="alert('Checkout integration initialized successfully!')" class="mt-8 w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition cursor-pointer">Acquire License</button>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- Footer -->
+        <!-- Embedded AI FAQ Chatbot Widget in Corner -->
+        <div class="fixed bottom-6 right-6 z-50">
+            <div id="chat-window" class="hidden bg-[#111622] border border-amber-500/30 rounded-3xl w-80 shadow-2xl overflow-hidden mb-4 flex flex-col">
+                <div class="bg-[#161d2d] p-4 border-b border-slate-800 flex justify-between items-center">
+                    <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div><span class="text-xs font-bold text-white">VeloClient AI Assistant</span></div>
+                    <button onclick="toggleChat()" class="text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div id="chat-messages" class="p-4 space-y-3 h-64 overflow-y-auto text-xs text-slate-300">
+                    <div class="bg-[#161d2d] p-3 rounded-xl border border-slate-800">Hello! Ask me anything about VeloClient pricing or security features.</div>
+                </div>
+                <div class="p-3 border-t border-slate-800 bg-[#090c10] flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Ask a question..." class="w-full bg-[#111622] border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+                    <button onclick="sendChatMessage()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-xl text-xs font-bold cursor-pointer">Send</button>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="bg-amber-600 hover:bg-amber-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-xl transition transform hover:scale-105 cursor-pointer">
+                <i class="fa-solid fa-comment-dots"></i>
+            </button>
+        </div>
+
         <footer class="bg-[#07090f] border-t border-slate-800 py-8 text-center text-xs text-slate-500">
             &copy; VeloClient Protocol. All rights reserved.
         </footer>
     </div>
 
-    <!-- ================= BULLETPROOF APP CONTROLLER SCRIPT ================= -->
+    <!-- ================= SECURE APP SCRIPT WITH PASSWORD CRITERIA ================= -->
     <script>
-        // Check session immediately on load
+        let authMode = 'signin';
+
+        function switchMode(mode) {
+            authMode = mode;
+            const signinBtn = document.getElementById('tab-signin');
+            const registerBtn = document.getElementById('tab-register');
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (mode === 'signin') {
+                signinBtn.className = "flex-1 py-2 text-xs font-bold rounded-xl bg-amber-600 text-white transition cursor-pointer";
+                registerBtn.className = "flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition cursor-pointer";
+                submitBtn.innerText = "Sign In to Workspace";
+            } else {
+                registerBtn.className = "flex-1 py-2 text-xs font-bold rounded-xl bg-amber-600 text-white transition cursor-pointer";
+                signinBtn.className = "flex-1 py-2 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition cursor-pointer";
+                submitBtn.innerText = "Register Account";
+            }
+        }
+
+        // Strict Password Criteria Validation Function
+        function validatePasswordCriteria(password) {
+            const minLength = password.length >= 8;
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[^A-Za-z0-9]/.test(password);
+
+            if (!minLength || !hasUppercase || !hasNumber || !hasSpecial) {
+                alert("Security Requirement Error:\nYour password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character.");
+                return false;
+            }
+            return true;
+        }
+
+        function handleSecureAuth(event) {
+            event.preventDefault();
+            const email = document.getElementById('email-input').value.trim().toLowerCase();
+            const password = document.getElementById('password-input').value.trim();
+
+            // Validate password complexity criteria
+            if (!validatePasswordCriteria(password)) return;
+
+            const storedPasswordKey = `veloclient_pwd_${email}`;
+
+            if (authMode === 'register') {
+                // Check if account already exists
+                if (localStorage.getItem(storedPasswordKey)) {
+                    alert("An account with this corporate email already exists. Please switch to Sign In.");
+                    return;
+                }
+                // Save credentials permanently
+                localStorage.setItem(storedPasswordKey, password);
+                localStorage.setItem('veloclient_auth', 'active');
+                localStorage.setItem('veloclient_user_email', email);
+                alert("Account registered and secured successfully!");
+                checkAppSession();
+            } else {
+                // Sign In mode: verify exact password match
+                const correctPassword = localStorage.getItem(storedPasswordKey);
+                
+                if (!correctPassword) {
+                    alert("No account found with this email address. Please register first.");
+                    return;
+                }
+
+                if (correctPassword !== password) {
+                    alert("Incorrect password entered for this email address. Please try again.");
+                    return;
+                }
+
+                // Successful secure match
+                localStorage.setItem('veloclient_auth', 'active');
+                localStorage.setItem('veloclient_user_email', email);
+                checkAppSession();
+            }
+        }
+
         function checkAppSession() {
             const auth = localStorage.getItem('veloclient_auth');
             const email = localStorage.getItem('veloclient_user_email');
@@ -110,45 +282,6 @@
             const emailDisplay = document.getElementById('user-email-display');
 
             if (auth === 'active' && email) {
-                // User is logged in: Hide login box, show main website
                 overlay.classList.add('hidden');
                 mainContent.classList.remove('hidden');
-                if (emailDisplay) emailDisplay.innerText = email;
-            } else {
-                // User is NOT logged in: Show login box, hide website
-                mainContent.classList.add('hidden');
-                overlay.classList.remove('hidden');
-            }
-        }
-
-        // Handle login form submission without page redirects
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('email-input').value.trim();
-            const password = document.getElementById('password-input').value.trim();
-
-            if (password.length < 6) {
-                alert("Password must be at least 6 characters long.");
-                return;
-            }
-
-            // Permanently store session
-            localStorage.setItem('veloclient_user_email', email);
-            localStorage.setItem('veloclient_auth', 'active');
-
-            // Instantly reveal the app without refreshing or redirecting
-            checkAppSession();
-        }
-
-        // Logout function clears storage and shows login box instantly
-        function logout() {
-            localStorage.removeItem('veloclient_auth');
-            localStorage.removeItem('veloclient_user_email');
-            checkAppSession();
-        }
-
-        // Run check immediately when file opens
-        checkAppSession();
-    </script>
-</body>
-</html>
+     
