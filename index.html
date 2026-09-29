@@ -15,17 +15,19 @@
                         url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
         }
         .luxury-card {
-            background: rgba(17, 22, 34, 0.9);
+            background: rgba(17, 22, 34, 0.92);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.25);
         }
+        .req-met { color: #34d399 !important; }
+        .req-unmet { color: #94a3b8 !important; }
     </style>
 </head>
 <body class="hero-bg text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
 
-    <!-- ================= SECURE AUTHENTICATION OVERLAY (Visible by default) ================= -->
-    <div id="auth-overlay" class="fixed inset-0 z-50 bg-[#090c10]/80 backdrop-blur-md flex items-center justify-center p-6">
-        <div class="luxury-card rounded-3xl p-10 max-w-md w-full shadow-2xl relative">
+    <!-- ================= SECURE AUTHENTICATION OVERLAY ================= -->
+    <div id="auth-overlay" class="fixed inset-0 z-50 bg-[#090c10]/85 backdrop-blur-md flex items-center justify-center p-6">
+        <div class="luxury-card rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
             <div class="text-center mb-6">
                 <span class="inline-block text-3xl font-extrabold text-white tracking-tight">Velo<span class="text-amber-500">Client</span></span>
                 <p class="text-xs text-slate-400 mt-2">Secure Enterprise Client Portal</p>
@@ -37,27 +39,38 @@
                 <button type="button" id="tab-register" onclick="switchMode('register')" class="flex-1 py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition cursor-pointer">Register</button>
             </div>
 
-            <form onsubmit="handleSecureAuth(event)" class="space-y-4">
+            <form onsubmit="handleAuthAction(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1.5">Corporate Email</label>
-                    <input type="email" id="email-input" placeholder="name@enterprise.com" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 font-medium" required>
+                    <input type="email" id="email-input" placeholder="name@enterprise.com" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 font-medium" required>
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-400 mb-1.5">Secure Password</label>
-                    <input type="password" id="password-input" placeholder="Min 8 chars, 1 uppercase, 1 number, 1 symbol" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
+                    <input type="password" id="password-input" oninput="checkPasswordCriteriaLive(this.value)" placeholder="Enter secure password" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500" required>
                 </div>
-                <button type="submit" id="submit-btn" class="w-full mt-4 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
+
+                <!-- Real-Time Password Criteria Checklist Dropdown (Visible during Register mode) -->
+                <div id="password-criteria-box" class="hidden bg-[#090c10]/80 p-3.5 rounded-xl border border-slate-800 text-[11px] space-y-1.5">
+                    <p class="font-bold text-slate-300 mb-1">Password Requirements:</p>
+                    <div id="req-len" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least 8 characters</div>
+                    <div id="req-upper" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least one uppercase letter (A-Z)</div>
+                    <div id="req-lower" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least one lowercase letter (a-z)</div>
+                    <div id="req-num" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least one number (0-9)</div>
+                    <div id="req-special" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least one special symbol (!@#$...)</div>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
                     Sign In to Workspace
                 </button>
             </form>
 
-            <p class="text-center text-[11px] text-slate-500 mt-6">
-                Strict Password Enforcement &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
+            <p class="text-center text-[11px] text-slate-500 mt-5">
+                Encrypted Client Isolation &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
             </p>
         </div>
     </div>
 
-    <!-- ================= FULL WEBSITE CONTENT (Revealed after successful login) ================= -->
+    <!-- ================= FULL WEBSITE CONTENT ================= -->
     <div id="main-content" class="flex flex-col justify-between min-h-screen hidden">
         <div>
             <!-- Navbar -->
@@ -195,92 +208,66 @@
         </footer>
     </div>
 
-    <!-- ================= APP CONTROL & SECURE AUTH SCRIPT ================= -->
+    <!-- ================= BULLETPROOF APP SCRIPT ================= -->
     <script>
-        let authMode = 'signin';
+        let currentAuthMode = 'signin';
 
         function switchMode(mode) {
-            authMode = mode;
+            currentAuthMode = mode;
             const signinBtn = document.getElementById('tab-signin');
             const registerBtn = document.getElementById('tab-register');
             const submitBtn = document.getElementById('submit-btn');
+            const criteriaBox = document.getElementById('password-criteria-box');
 
             if (mode === 'signin') {
                 signinBtn.className = "flex-1 py-2.5 text-xs font-bold rounded-xl bg-amber-600 text-white transition cursor-pointer";
                 registerBtn.className = "flex-1 py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition cursor-pointer";
                 submitBtn.innerText = "Sign In to Workspace";
+                criteriaBox.classList.add('hidden');
             } else {
                 registerBtn.className = "flex-1 py-2.5 text-xs font-bold rounded-xl bg-amber-600 text-white transition cursor-pointer";
                 signinBtn.className = "flex-1 py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition cursor-pointer";
                 submitBtn.innerText = "Register Account";
+                criteriaBox.classList.remove('hidden');
             }
         }
 
-        // Strict Password Criteria Validation (Min 8 chars, 1 uppercase, 1 number, 1 symbol)
-        function validatePasswordCriteria(password) {
-            const minLength = password.length >= 8;
-            const hasUppercase = /[A-Z]/.test(password);
-            const hasNumber = /[0-9]/.test(password);
-            const hasSpecial = /[^A-Za-z0-9]/.test(password);
+        // Real-Time Visual Password Criteria Checklist
+        function checkPasswordCriteriaLive(password) {
+            if (currentAuthMode !== 'register') return;
 
-            if (!minLength || !hasUppercase || !hasNumber || !hasSpecial) {
-                alert("Security Requirement Error:\nYour password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character.");
-                return false;
-            }
-            return true;
+            const isLen = password.length >= 8;
+            const isUpper = /[A-Z]/.test(password);
+            const isLower = /[a-z]/.test(password);
+            const isNum = /[0-9]/.test(password);
+            const isSpecial = /[^A-Za-z0-9]/.test(password);
+
+            updateCriteriaLine('req-len', isLen);
+            updateCriteriaLine('req-upper', isUpper);
+            updateCriteriaLine('req-lower', isLower);
+            updateCriteriaLine('req-num', isNum);
+            updateCriteriaLine('req-special', isSpecial);
         }
 
-        function handleSecureAuth(event) {
+        function updateCriteriaLine(elementId, isValid) {
+            const el = document.getElementById(elementId);
+            if (isValid) {
+                el.className = "req-met flex items-center gap-2";
+                el.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i> ` + el.innerText.replace(/^[✓•]\s*/, '');
+            } else {
+                el.className = "req-unmet flex items-center gap-2";
+                el.innerHTML = `<i class="fa-solid fa-circle text-[6px]"></i> ` + el.innerText.replace(/^[✓•]\s*/, '');
+            }
+        }
+
+        function handleAuthAction(event) {
             event.preventDefault();
             const email = document.getElementById('email-input').value.trim().toLowerCase();
             const password = document.getElementById('password-input').value.trim();
 
-            if (!validatePasswordCriteria(password)) return;
-
-            const storedPasswordKey = `veloclient_pwd_${email}`;
-
-            if (authMode === 'register') {
-                if (localStorage.getItem(storedPasswordKey)) {
-                    alert("An account with this corporate email already exists. Please switch to Sign In.");
-                    return;
-                }
-                localStorage.setItem(storedPasswordKey, password);
-                localStorage.setItem('veloclient_auth', 'active');
-                localStorage.setItem('veloclient_user_email', email);
-                alert("Account registered and secured successfully!");
-                checkAppSession();
-            } else {
-                const correctPassword = localStorage.getItem(storedPasswordKey);
-                
-                if (!correctPassword) {
-                    alert("No account found with this email address. Please register first.");
-                    return;
-                }
-
-                if (correctPassword !== password) {
-                    alert("Incorrect password entered for this email address. Please try again.");
-                    return;
-                }
-
-                localStorage.setItem('veloclient_auth', 'active');
-                localStorage.setItem('veloclient_user_email', email);
-                checkAppSession();
+            if (!email) {
+                alert("Please enter a valid email address.");
+                return;
             }
-        }
 
-        function checkAppSession() {
-            const auth = localStorage.getItem('veloclient_auth');
-            const email = localStorage.getItem('veloclient_user_email');
-            
-            const overlay = document.getElementById('auth-overlay');
-            const mainContent = document.getElementById('main-content');
-            const emailDisplay = document.getElementById('user-email-display');
-
-            if (auth === 'active' && email) {
-                overlay.classList.add('hidden');
-                mainContent.classList.remove('hidden');
-                if (emailDisplay) emailDisplay.innerText = email;
-            } else {
-                mainContent.classList.remove('hidden');
-                overlay.classList.remove('hidden');
-      
+            const storageKey
