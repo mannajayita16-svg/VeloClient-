@@ -10,118 +10,170 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .hero-bg {
-            background: linear-gradient(to bottom, rgba(5, 7, 15, 0.7), rgba(5, 7, 15, 0.95)), 
-                        url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+        .old-money-bg {
+            background: linear-gradient(135deg, #090c10 0%, #111622 50%, #0d111a 100%);
+        }
+        .luxury-card {
+            background: rgba(17, 22, 34, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
     </style>
 </head>
-<body class="bg-[#05070f] text-white antialiased selection:bg-blue-600 selection:text-white">
-    <!-- Navbar -->
-    <nav class="sticky top-0 z-50 backdrop-blur-2xl bg-[#05070f]/80 border-b border-slate-800/80">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <span class="text-xl font-extrabold tracking-tight text-white">Velo<span class="text-blue-400">Client</span></span>
-            </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-                <a href="index.html" class="text-white">Home</a>
-                <a href="pricing.html" class="hover:text-white transition">Pricing</a>
-                <a href="dashboard.html" class="hover:text-white transition">Dashboard</a>
-                <a href="auth.html" class="hover:text-white transition">Sign In</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="auth.html" class="text-sm font-semibold text-slate-300 hover:text-white transition hidden sm:inline">Sign In</a>
-                <a href="pricing.html" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition shadow-lg shadow-blue-600/30">Get Started</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section with Aesthetic Background & Laptop Mockup -->
-    <section class="hero-bg min-h-[90vh] flex items-center relative overflow-hidden pt-12 pb-24">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center w-full">
-            <div class="lg:col-span-6 space-y-8">
-                <div class="inline-flex items-center gap-2 bg-slate-900/90 border border-slate-800 px-4 py-2 rounded-full text-xs font-semibold text-slate-300 shadow-xl">
-                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                    <span>Trusted by 500+ Elite Agencies</span>
+<body class="old-money-bg text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
+    <div>
+        <!-- Navbar -->
+        <nav class="sticky top-0 z-50 backdrop-blur-2xl bg-[#090c10]/90 border-b border-slate-800">
+            <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl font-extrabold tracking-tight text-white">Velo<span class="text-amber-500 font-normal">Client</span></span>
                 </div>
-                
-                <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
-                    Onboard Clients <br>in Minutes, <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-white">Not Hours.</span>
-                </h1>
-                
-                <p class="text-slate-300 text-lg max-w-xl leading-relaxed">
-                    VeloClient automates your client intake and audit process with enterprise AI precision — eliminating messy email threads forever.
-                </p>
-                
-                <div class="flex flex-wrap gap-4 items-center pt-2">
-                    <a href="pricing.html" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-xl transition shadow-xl shadow-blue-600/30 flex items-center gap-3">
-                        Get Started Now <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </a>
-                    <a href="dashboard.html?demo=true" class="border border-slate-800 bg-slate-900/50 hover:bg-slate-900 text-slate-200 font-semibold px-8 py-4 rounded-xl transition flex items-center gap-3">
-                        <i class="fa-regular fa-circle-play text-blue-400"></i> Explore Demo Account
-                    </a>
+                <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
+                    <a href="index.html" class="text-amber-400 font-semibold">Home</a>
+                    <a href="pricing.html" class="hover:text-amber-400 transition">Pricing</a>
+                    <a href="dashboard.html" class="hover:text-amber-400 transition">Dashboard</a>
+                    <a href="auth.html" class="hover:text-amber-400 transition">Sign In</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="auth.html" class="text-sm font-semibold text-slate-300 hover:text-white transition hidden sm:inline">Sign In</a>
+                    <a href="pricing.html" class="bg-amber-600 hover:bg-amber-500 text-white text-sm font-semibold px-6 py-3 rounded-xl transition shadow-xl shadow-amber-900/20">Get Started</a>
                 </div>
             </div>
+        </nav>
 
-            <!-- Aesthetic Luxury Laptop Mockup -->
-            <div class="lg:col-span-6 relative">
-                <div class="absolute -inset-4 bg-gradient-to-tr from-blue-600/20 to-indigo-600/10 rounded-3xl blur-3xl"></div>
-                <div class="relative bg-[#111827] border-2 border-slate-700/80 rounded-2xl p-3 shadow-2xl backdrop-blur-md">
-                    <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3 px-1">
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-                        </div>
-                        <span class="text-xs text-slate-400 font-mono bg-slate-900 px-3 py-1 rounded-md border border-slate-800">app.veloclient.com</span>
-                        <div class="w-10"></div>
+        <!-- Full-Page Immersive Hero Section -->
+        <section class="min-h-[85vh] flex items-center relative overflow-hidden py-24 px-8">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center w-full">
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center gap-2 bg-[#141a29] border border-amber-500/30 px-4 py-2 rounded-full text-xs font-semibold text-amber-300 shadow-xl">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span>Trusted by 500+ Elite Corporate Agencies Worldwide</span>
                     </div>
-                    <div class="bg-[#0b0f19] rounded-xl p-5 border border-slate-800 space-y-4">
-                        <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-                            <span class="text-xs font-extrabold text-white">VeloClient Workspace</span>
-                            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-semibold">System Online</span>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+                        Onboard Clients <br>in Minutes, <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Not Hours.</span>
+                    </h1>
+                    
+                    <p class="text-slate-300 text-lg lg:text-xl max-w-2xl leading-relaxed font-normal">
+                        VeloClient automates your corporate client intake and audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict NDA standards.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-5 items-center pt-4">
+                        <a href="pricing.html" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-8 py-4 rounded-xl transition shadow-2xl shadow-amber-900/40 flex items-center gap-3 text-base">
+                            View Pricing Options <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="dashboard.html?demo=true" class="border border-slate-700 bg-[#111622] hover:bg-[#161d2d] text-slate-200 font-semibold px-8 py-4 rounded-xl transition flex items-center gap-3 text-base">
+                            <i class="fa-regular fa-circle-play text-amber-400"></i> Explore Demo Account
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Visual Mockup Column -->
+                <div class="lg:col-span-5 relative">
+                    <div class="absolute -inset-6 bg-gradient-to-tr from-amber-600/10 to-transparent rounded-3xl blur-3xl"></div>
+                    <div class="luxury-card rounded-3xl p-6 shadow-2xl relative border border-amber-500/20 space-y-5">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Enterprise Portal</span>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Active & Secure</span>
                         </div>
-                        <div class="grid grid-cols-3 gap-3">
-                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800"><p class="text-[10px] text-slate-400">Clients</p><p class="text-base font-bold text-white mt-0.5">12</p></div>
-                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800"><p class="text-[10px] text-slate-400">Pending</p><p class="text-base font-bold text-amber-400 mt-0.5">3</p></div>
-                            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800"><p class="text-[10px] text-slate-400">Readiness</p><p class="text-base font-bold text-blue-400 mt-0.5">68%</p></div>
+                        <div class="space-y-3">
+                            <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
+                                <div><p class="text-xs text-slate-400">Corporate Client</p><p class="text-base font-bold text-white">Stark Industries</p></div>
+                                <span class="text-xs text-emerald-400 font-bold bg-emerald-950/50 px-3 py-1 rounded-lg">Verified</span>
+                            </div>
+                            <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
+                                <div><p class="text-xs text-slate-400">Asset Audit Status</p><p class="text-base font-bold text-amber-400">100% Complete</p></div>
+                                <i class="fa-solid fa-shield-check text-amber-400 text-xl"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="mx-auto w-48 h-3 bg-slate-700/80 rounded-b-xl shadow-2xl mt-0.5"></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Aesthetic Image Showcase Gallery -->
-    <section class="py-16 bg-[#03050a] border-t border-slate-800/80">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <h2 class="text-3xl font-bold tracking-tight text-white">Built for Elite Creative Teams</h2>
-                <p class="text-slate-400 text-sm mt-2">Experience a seamless, clutter-free intake workflow designed for high-end US agencies.</p>
+        <!-- Aesthetic Gallery Showcase Section -->
+        <section class="py-20 bg-[#07090f] border-t border-slate-800/80 px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-4xl font-extrabold tracking-tight text-white">Engineered for World-Class Operations</h2>
+                    <p class="text-slate-400 text-base mt-3">Designed with timeless elegance to command high corporate respect from US and global enterprises.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" alt="Executive Workspace" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
+                            <div><p class="text-base font-bold text-white">Executive Control</p><p class="text-xs text-slate-400 mt-1">Manage global accounts with absolute clarity.</p></div>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop" alt="Financial Security" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
+                            <div><p class="text-base font-bold text-white">Bank-Grade Privacy</p><p class="text-xs text-slate-400 mt-1">Secure escrow storage and encrypted asset transfers.</p></div>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&auto=format&fit=crop" alt="Corporate Growth" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
+                            <div><p class="text-base font-bold text-white">Rapid Scaling</p><p class="text-xs text-slate-400 mt-1">Accelerate multi-million dollar client onboarding cycles.</p></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="rounded-2xl overflow-hidden border border-slate-800 relative group shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop" alt="Team Collaboration" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex items-end p-6">
-                        <div><p class="text-sm font-bold text-white">Unified Team Sync</p><p class="text-xs text-slate-400">Collaborate effortlessly on client assets.</p></div>
-                    </div>
-                </div>
-                <div class="rounded-2xl overflow-hidden border border-slate-800 relative group shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=600&auto=format&fit=crop" alt="Workspace" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex items-end p-6">
-                        <div><p class="text-sm font-bold text-white">Automated AI Audits</p><p class="text-xs text-slate-400">Instantly flag missing brand guidelines.</p></div>
-                    </div>
-                </div>
-                <div class="rounded-2xl overflow-hidden border border-slate-800 relative group shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&auto=format&fit=crop" alt="Agency Success" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex items-end p-6">
-                        <div><p class="text-sm font-bold text-white">Scale Faster</p><p class="text-xs text-slate-400">Onboard 3x more clients every single month.</p></div>
-                    </div>
-                </div>
+        </section>
+    </div>
+
+    <!-- Embedded AI FAQ Chatbot Widget in Bottom Corner -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <div id="chat-window" class="hidden bg-[#111622] border border-amber-500/30 rounded-3xl w-80 shadow-2xl overflow-hidden mb-4 flex flex-col">
+            <div class="bg-[#161d2d] p-4 border-b border-slate-800 flex justify-between items-center">
+                <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div><span class="text-xs font-bold text-white">VeloClient AI Assistant</span></div>
+                <button onclick="toggleChat()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="chat-messages" class="p-4 space-y-3 h-64 overflow-y-auto text-xs text-slate-300">
+                <div class="bg-[#161d2d] p-3 rounded-xl border border-slate-800">Hello! Ask me anything about VeloClient pricing, security, or onboarding features.</div>
+            </div>
+            <div class="p-3 border-t border-slate-800 bg-[#090c10] flex gap-2">
+                <input type="text" id="chat-input" placeholder="Ask a question..." class="w-full bg-[#111622] border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+                <button onclick="sendChatMessage()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-xl text-xs font-bold">Send</button>
             </div>
         </div>
-    </section>
+        <button onclick="toggleChat()" class="bg-amber-600 hover:bg-amber-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-xl transition transform hover:scale-105">
+            <i class="fa-solid fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <script>
+        function toggleChat() {
+            const win = document.getElementById('chat-window');
+            win.classList.toggle('hidden');
+        }
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const msgContainer = document.getElementById('chat-messages');
+            if(!input.value.trim()) return;
+            
+            const userMsg = document.createElement('div');
+            userMsg.className = "bg-amber-600/20 text-amber-200 p-3 rounded-xl ml-auto max-w-[80%] border border-amber-500/20";
+            userMsg.innerText = input.value;
+            msgContainer.appendChild(userMsg);
+            
+            const txt = input.value.toLowerCase();
+            input.value = '';
+            
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = "bg-[#161d2d] p-3 rounded-xl border border-slate-800 text-slate-300";
+                if(txt.includes('price') || txt.includes('cost')) {
+                    aiMsg.innerText = "VeloClient Pro is available as a one-time lifetime investment of $10,000 (90% off $100,000) or $199/month.";
+                } else if(txt.includes('security') || txt.includes('safe')) {
+                    aiMsg.innerText = "We use bank-grade 256-bit SSL encryption and strict NDA compliance standards for all client data.";
+                } else {
+                    aiMsg.innerText = "That's a great question! For custom enterprise inquiries, please reach out directly to anikmanna697@gmail.com.";
+                }
+                msgContainer.appendChild(aiMsg);
+                msgContainer.scrollTop = msgContainer.scrollHeight;
+            }, 500);
+        }
+    </script>
 </body>
-                                                                                         </html>
-                                                                                         
+</html>
