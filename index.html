@@ -200,22 +200,22 @@
 </body>    <!-- Your existing HTML content here -->
 
     <script>
-    // Verify session immediately when page loads
-    const authStatus = localStorage.getItem('veloclient_auth');
-    const userEmail = localStorage.getItem('veloclient_user_email');
+    // Load user email into the navbar if they are logged in
+    window.addEventListener('DOMContentLoaded', () => {
+        const authStatus = localStorage.getItem('veloclient_auth');
+        const userEmail = localStorage.getItem('veloclient_user_email');
+        const displayEl = document.getElementById('user-email-display');
 
-    if (authStatus !== 'active' || !userEmail) {
-        // If not logged in, bounce to auth.html
-        window.location.href = 'auth.html';
-    } else {
-        // Display email in navbar safely
-        window.addEventListener('DOMContentLoaded', () => {
-            const displayEl = document.getElementById('user-email-display');
+        if (authStatus === 'active' && userEmail) {
             if (displayEl) {
                 displayEl.innerText = userEmail;
             }
-        });
-    }
+        } else {
+            if (displayEl) {
+                displayEl.innerHTML = '<a href="auth.html" class="text-amber-400 hover:underline">Sign In</a>';
+            }
+        }
+    });
 
     // Global Logout Function
     function logout() {
@@ -224,5 +224,6 @@
         window.location.href = 'auth.html';
     }
         </script>
+    
 </html>
         
