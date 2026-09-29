@@ -8,66 +8,71 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+    <style>body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #090c10; }</style>
 </head>
-<body class="bg-slate-950 text-white antialiased">
-    <nav class="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <span class="text-xl font-extrabold tracking-tight text-white">Velo<span class="text-slate-400">Client</span></span>
-            </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-                <a href="index.html" class="hover:text-white transition">Home</a>
-                <a href="pricing.html" class="text-white font-semibold">Pricing</a>
-                <a href="dashboard.html" class="hover:text-white transition">Dashboard</a>
-                <a href="auth.html" class="hover:text-white transition">Sign In</a>
-            </div>
-        </div>
-    </nav>
-
-    <section class="max-w-5xl mx-auto px-6 pt-20 pb-12 text-center">
-        <span class="bg-slate-900 border border-slate-800 text-slate-300 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">Simple Pricing</span>
-        <h2 class="text-4xl lg:text-6xl font-extrabold tracking-tight text-white mt-4 mb-4">One Plan. Everything You Need.</h2>
-        <p class="text-slate-400 max-w-xl mx-auto text-base">No hidden fees. Just a powerful elite tool for modern agencies.</p>
-    </section>
-
-    <section class="max-w-6xl mx-auto px-6 pb-24 grid lg:grid-cols-2 gap-8 items-stretch">
-        <!-- Monthly Plan -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
-            <div>
-                <h3 class="text-2xl font-bold text-white mb-2">VeloClient AI</h3>
-                <p class="text-slate-400 text-sm mb-8">Full access to all features for growing agencies.</p>
-                <div class="flex items-baseline gap-2 mb-8">
-                    <span class="text-6xl font-black text-white">$199</span>
-                    <span class="text-slate-400 text-sm font-semibold">/month</span>
+<body class="text-slate-100 antialiased min-h-screen flex flex-col justify-between">
+    <div>
+        <nav class="sticky top-0 z-50 backdrop-blur-2xl bg-[#090c10]/90 border-b border-slate-800">
+            <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
+                <span class="text-2xl font-extrabold tracking-tight text-white">Velo<span class="text-amber-500 font-normal">Client</span></span>
+                <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
+                    <a href="index.html" class="hover:text-amber-400 transition">Home</a>
+                    <a href="pricing.html" class="text-amber-400 font-semibold">Pricing</a>
+                    <a href="dashboard.html" class="hover:text-amber-400 transition">Dashboard</a>
+                    <a href="auth.html" class="hover:text-amber-400 transition">Sign In</a>
                 </div>
-                <ul class="space-y-4 text-sm text-slate-300 mb-8 border-t border-slate-800 pt-6">
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-400"></i> Unlimited client onboarding</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-400"></i> AI audit & missing asset detection</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-400"></i> Secure file upload hub</li>
-                </ul>
             </div>
-            <a href="checkout.html" class="block text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-4 rounded-xl transition border border-slate-700">Buy Now</a>
-        </div>
+        </nav>
 
-        <!-- Lifetime Deal Card -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 relative flex flex-col justify-between shadow-xl">
-            <div class="absolute -top-3.5 right-8 bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full">Limited Time Offer</div>
-            <div>
-                <h3 class="text-2xl font-bold text-white mb-2 mt-2">VeloClient Pro</h3>
-                <p class="text-slate-400 text-sm mb-6">One-time payment. Lifetime access.</p>
-                <div class="flex items-baseline gap-4 mb-4">
-                    <span class="text-xl text-slate-500 line-through font-semibold">$100,000</span>
-                    <span class="text-6xl font-black text-white">$10,000</span>
-                    <span class="bg-slate-800 text-slate-300 text-xs font-bold px-2.5 py-1 rounded-md border border-slate-700">90% OFF</span>
+        <section class="max-w-5xl mx-auto px-8 pt-24 pb-16 text-center">
+            <span class="bg-[#141a29] border border-amber-500/30 text-amber-300 text-xs font-bold px-5 py-2 rounded-full uppercase tracking-wider">Enterprise Investment</span>
+            <h2 class="text-4xl lg:text-6xl font-extrabold tracking-tight text-white mt-6 mb-4">One Plan. Everything You Need.</h2>
+            <p class="text-slate-400 max-w-xl mx-auto text-base">No hidden fees. Designed for elite corporate agencies.</p>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-8 pb-32 grid lg:grid-cols-2 gap-10 items-stretch">
+            <!-- Monthly Plan with Most Popular Badge -->
+            <div class="bg-[#111622] border border-amber-500/40 rounded-3xl p-10 flex flex-col justify-between shadow-2xl relative">
+                <div class="absolute -top-4 left-10 bg-amber-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-lg">Most Popular</div>
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-2 mt-2">VeloClient AI</h3>
+                    <p class="text-slate-400 text-sm mb-8">Full access to all features for growing agencies.</p>
+                    <div class="flex items-baseline gap-2 mb-8">
+                        <span class="text-6xl font-black text-white">$199</span>
+                        <span class="text-slate-400 text-sm font-semibold">/month</span>
+                    </div>
+                    <ul class="space-y-4 text-sm text-slate-300 mb-8 border-t border-slate-800 pt-6">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> Unlimited client onboarding</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> AI audit & missing asset detection</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> Secure file submission hub</li>
+                    </ul>
                 </div>
-                <ul class="space-y-3 text-sm text-slate-300 mb-8 border-t border-slate-800 pt-6">
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-400"></i> Everything in Pro (lifetime access)</li>
-                    <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-400"></i> Priority support & White-label option</li>
-                </ul>
+                <a href="checkout.html" class="block text-center bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-xl shadow-amber-900/30">Buy Now</a>
             </div>
-            <a href="checkout.html" class="block text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-4 rounded-xl transition border border-slate-700">Buy Now</a>
-        </div>
-    </section>
+
+            <!-- Lifetime Deal Card (Prominent Big Words & One-Time Notice) -->
+            <div class="bg-[#111622] border border-slate-800 rounded-3xl p-10 relative flex flex-col justify-between shadow-2xl">
+                <div class="absolute -top-4 right-10 bg-[#161d2d] border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full">Limited Time Offer</div>
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-2 mt-2">VeloClient Pro Lifetime</h3>
+                    <p class="text-slate-400 text-sm mb-6">ONE-TIME PAYMENT. NO MONTHLY FEES EVER.</p>
+                    <div class="flex items-baseline gap-4 mb-4">
+                        <span class="text-xl text-slate-500 line-through font-semibold">$100,000</span>
+                        <span class="text-5xl lg:text-6xl font-black text-amber-400">$10,000</span>
+                        <span class="bg-[#161d2d] text-amber-300 text-xs font-bold px-3 py-1 rounded-md border border-amber-500/20">90% OFF</span>
+                    </div>
+                    <p class="text-xs text-amber-300 font-bold uppercase tracking-wider mb-6">LIMITED TIME OFFER — SAVE $90,000 FOREVER</p>
+                    
+                    <ul class="space-y-3 text-sm text-slate-300 mb-8 border-t border-slate-800 pt-6">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> Everything in Pro (LIFETIME ACCESS)</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> Priority support & White-label option</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-amber-400"></i> Zero recurring monthly charges</li>
+                    </ul>
+                </div>
+                <a href="checkout.html" class="block text-center bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-xl transition border border-slate-700">Buy Now</a>
+            </div>
+        </section>
+    </div>
 </body>
-</html>
+                </html>
+                
