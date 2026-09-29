@@ -200,36 +200,29 @@
 </body>    <!-- Your existing HTML content here -->
 
     <script>
-    // 1. Check if an email was passed in the URL from auth.html
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlEmail = urlParams.get('email');
+    // Verify session immediately when page loads
+    const authStatus = localStorage.getItem('veloclient_auth');
+    const userEmail = localStorage.getItem('veloclient_user_email');
 
-    if (urlEmail) {
-        // If passed from login, save it permanently into browser storage
-        localStorage.setItem('veloclient_user_email', urlEmail);
-        localStorage.setItem('veloclient_authenticated', 'true');
-    }
-
-    // 2. Check local persistent session
-    const savedEmail = localStorage.getItem('veloclient_user_email');
-    const isAuthenticated = localStorage.getItem('veloclient_authenticated');
-
-    if (!isAuthenticated || !savedEmail) {
-        // Only bounce back to auth if there is genuinely no session and no URL email
+    if (authStatus !== 'active' || !userEmail) {
+        // If not logged in, bounce to auth.html
         window.location.href = 'auth.html';
     } else {
-        // Display the user's email correctly in the navbar
-        const emailDisplay = document.getElementById('user-email-display');
-        if (emailDisplay) {
-            emailDisplay.innerText = savedEmail;
-        }
+        // Display email in navbar safely
+        window.addEventListener('DOMContentLoaded', () => {
+            const displayEl = document.getElementById('user-email-display');
+            if (displayEl) {
+                displayEl.innerText = userEmail;
+            }
+        });
     }
 
-    // 3. Logout function
+    // Global Logout Function
     function logout() {
-        localStorage.removeItem('veloclient_authenticated');
+        localStorage.removeItem('veloclient_auth');
         localStorage.removeItem('veloclient_user_email');
         window.location.href = 'auth.html';
     }
-    </script>
-</html> 
+        </script>
+</html>
+        
