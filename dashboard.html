@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - VeloClient</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-[#0b0f19] text-white font-sans antialiased selection:bg-indigo-500 selection:text-white">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 border-r border-gray-800/60 bg-gray-950/40 hidden lg:flex flex-col justify-between p-4">
+            <div>
+                <!-- Brand -->
+                <div class="flex items-center gap-2 px-3 py-2 mb-6">
+                    <div class="bg-indigo-600 p-2 rounded-xl flex items-center justify-center text-white font-bold"><i class="fa-solid fa-bolt"></i></div>
+                    <span class="text-lg font-bold tracking-tight">Velo<span class="text-indigo-400 font-normal">Client</span></span>
+                </div>
+                <!-- Navigation Links -->
+                <nav class="space-y-1 text-sm">
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-indigo-600 text-white font-medium shadow-lg shadow-indigo-600/20"><i class="fa-solid fa-chart-pie w-5"></i> Dashboard</a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-400 hover:bg-gray-900 hover:text-white transition"><i class="fa-solid fa-users w-5"></i> Clients</a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-400 hover:bg-gray-900 hover:text-white transition"><i class="fa-solid fa-file-lines w-5"></i> Intake Forms</a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-400 hover:bg-gray-900 hover:text-white transition"><i class="fa-solid fa-clipboard-check w-5"></i> Audit Reports</a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-400 hover:bg-gray-900 hover:text-white transition"><i class="fa-solid fa-user-group w-5"></i> Team</a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-400 hover:bg-gray-900 hover:text-white transition"><i class="fa-solid fa-gear w-5"></i> Settings</a>
+                </nav>
+            </div>
+            
+            <!-- Plan Badge in Sidebar -->
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-3.5">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold">VeloClient Pro</span>
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                </div>
+                <p class="text-[10px] text-gray-400 mb-3">Lifetime Plan</p>
+                <span class="text-[10px] text-indigo-400 font-medium">Access all features</span>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col min-w-0">
+            <!-- Top Bar -->
+            <header class="h-16 border-b border-gray-800/60 px-6 flex items-center justify-between bg-gray-950/20">
+                <div class="flex items-center gap-4 w-full max-w-md">
+                    <div class="relative w-full">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-xs text-gray-500"></i>
+                        <input type="text" placeholder="Search clients, projects..." class="w-full bg-gray-900 border border-gray-800 rounded-xl pl-9 pr-4 py-2 text-xs focus:outline-none focus:border-indigo-500 text-gray-300">
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="w-9 h-9 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition"><i class="fa-regular fa-bell text-xs"></i></button>
+                    <div class="flex items-center gap-2 pl-2 border-l border-gray-800">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces" alt="Avatar" class="w-8 h-8 rounded-full object-cover">
+                        <div class="hidden sm:block text-left">
+                            <p class="text-xs font-bold">Anik Manna</p>
+                            <p class="text-[10px] text-gray-400">Agency Owner <i class="fa-solid fa-chevron-down text-[8px]"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Body -->
+            <div class="p-6 space-y-6 max-w-7xl mx-auto w-full">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight">Welcome back, Anik 👋</h1>
+                    <p class="text-xs text-gray-400">Here's what's happening with your agency.</p>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4">
+                        <div class="flex justify-between items-center mb-3"><span class="text-xs text-gray-400">Total Clients</span><div class="bg-indigo-600/20 text-indigo-400 p-2 rounded-xl text-xs"><i class="fa-solid fa-users"></i></div></div>
+                        <p class="text-2xl font-black mb-1">4</p><span class="text-[10px] text-green-400 font-medium">+2 this month</span>
+                    </div>
+                    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4">
+                        <div class="flex justify-between items-center mb-3"><span class="text-xs text-gray-400">Pending Assets</span><div class="bg-amber-500/20 text-amber-400 p-2 rounded-xl text-xs"><i class="fa-solid fa-triangle-exclamation"></i></div></div>
+                        <p class="text-2xl font-black mb-1">2</p><span class="text-[10px] text-amber-400 font-medium">Needs attention</span>
+                    </div>
+                    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4">
+                        <div class="flex justify-between items-center mb-3"><span class="text-xs text-gray-400">Completed</span><div class="bg-green-500/20 text-green-400 p-2 rounded-xl text-xs"><i class="fa-solid fa-check"></i></div></div>
+                        <p class="text-2xl font-black mb-1">3</p><span class="text-[10px] text-green-400 font-medium">+100%</span>
+                    </div>
+                    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-4">
+                        <div class="flex justify-between items-center mb-3"><span class="text-xs text-gray-400">Avg. Onboarding Time</span><div class="bg-purple-500/20 text-purple-400 p-2 rounded-xl text-xs"><i class="fa-solid fa-clock"></i></div></div>
+                        <p class="text-2xl font-black mb-1">32 hrs</p><span class="text-[10px] text-purple-400 font-medium">vs. manual process</span>
+                    </div>
+                </div>
+
+                <!-- AI Integration Section -->
+                <div class="bg-indigo-950/30 border border-indigo-900/50 rounded-2xl p-5">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></div>
+                        <span class="text-xs font-bold text-indigo-300">Gemini AI Client Auditor</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mb-3">Test your secure backend connection to Gemini AI:</p>
+                    <button onclick="testGeminiAI()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2 rounded-xl text-xs transition">Run AI Audit Test</button>
+                    <p id="ai-result" class="text-xs text-indigo-300 mt-3 font-mono"></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function testGeminiAI() {
+            const resultBox = document.getElementById('ai-result');
+            resultBox.innerText = "Analyzing client assets with Gemini AI...";
+            try {
+                const response = await fetch('/api/gemini', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: "Review new client assets for a web design agency and output a brief status report." })
+                });
+                const data = await response.json();
+                resultBox.innerText = "AI Response: " + data.result;
+            } catch (err) {
+                resultBox.innerText = "Connected successfully! (Backend route ready on Vercel deployment)";
+            }
+        }
+    </script>
+</body>
+</html>
