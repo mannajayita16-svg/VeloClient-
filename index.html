@@ -197,6 +197,30 @@
 
         checkSession();
     </script>
+</body>    <!-- Your existing HTML content here -->
+
+    <script>
+        // Check local persistent session
+        const savedEmail = localStorage.getItem('veloclient_user_email');
+        const isAuthenticated = localStorage.getItem('veloclient_authenticated');
+
+        if (!isAuthenticated || !savedEmail) {
+            // If not authenticated, send them back to the sign-in page
+            window.location.href = 'auth.html';
+        } else {
+            // Display the user's email correctly in the navbar
+            const emailDisplay = document.getElementById('user-email-display');
+            if (emailDisplay) emailDisplay.innerText = savedEmail;
+        }
+
+        function logout() {
+            localStorage.removeItem('veloclient_authenticated');
+            localStorage.removeItem('veloclient_user_email');
+            window.location.href = 'auth.html';
+        }
+    </script>
 </body>
-                </html>
+</html>
+
+                
                 
