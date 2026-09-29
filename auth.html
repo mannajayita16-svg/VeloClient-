@@ -46,11 +46,11 @@
                 return;
             }
 
-            // Save user data securely so it is NEVER forgotten after checkout or navigation
+            // Save credentials securely in browser storage
             localStorage.setItem('veloclient_user_email', email);
             localStorage.setItem('veloclient_auth', 'active');
 
-            // Direct smooth transition to index.html
+            // Head straight to index.html
             window.location.href = 'index.html';
         });
     </script>
