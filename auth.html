@@ -25,8 +25,8 @@
                 <input type="email" id="email-input" placeholder="name@enterprise.com" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 font-medium" required>
             </div>
             <div>
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Password</label>
-                <input type="password" id="password-input" placeholder="••••••••••••" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
+                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Create / Enter Your Password</label>
+                <input type="password" id="password-input" placeholder="At least 6 characters" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
             </div>
             <button type="submit" id="submit-btn" class="w-full mt-4 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
                 Sign In / Register
@@ -39,9 +39,9 @@
     </div>
 
     <script>
-        // Replace with your actual Supabase URL and Publishable Anon Key
-        const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        // REPLACE THESE WITH YOUR REAL SUPABASE URL AND PUBLISHABLE KEY FROM YOUR DASHBOARD API SETTINGS
+        const SUPABASE_URL = 'https://fjtutrvsoohxvpnqfhgu.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_al-XL6fXqnQwYDI3H5_5Mg_umQC6orn';
         
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -51,23 +51,28 @@
             const password = document.getElementById('password-input').value.trim();
             const submitBtn = document.getElementById('submit-btn');
 
+            if (password.length < 6) {
+                alert("For security, your password must be at least 6 characters long.");
+                return;
+            }
+
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Authenticating...`;
             submitBtn.disabled = true;
 
             try {
-                // Try logging in
+                // First try to sign in with the password they provided
                 let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
                 
-                // If user doesn't exist, automatically sign them up
+                // If account doesn't exist yet, automatically register them with this password
                 if (error) {
                     const signUpRes = await supabaseClient.auth.signUp({ email, password });
                     if (signUpRes.error) throw signUpRes.error;
                 }
 
-                // Successful authentication -> Proceed to index.html home page in sequence
+                // Successful login -> Proceed to index.html in sequence
                 window.location.href = 'index.html';
             } catch (err) {
-                alert("Authentication error: " + err.message);
+                alert("Authentication error: " + err.message + "\n\n(Tip: Make sure you updated SUPABASE_URL and SUPABASE_ANON_KEY with your real keys!)");
                 submitBtn.innerHTML = `Sign In / Register`;
                 submitBtn.disabled = false;
             }
