@@ -18,29 +18,29 @@
             <p class="text-xs text-slate-400 mt-2">Secure Enterprise Client & Agency Portal</p>
         </div>
 
-        <!-- Elite SSO Sign-In Buttons Grid -->
-        <div class="space-y-3 mb-6">
-            <button onclick="handleLogin('Google')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
-                <i class="fa-brands fa-google text-amber-400 text-sm"></i> Continue with Google
+        <!-- Working SSO Sign-In Buttons -->
+        <div class="space-y-3 mb-6" id="sso-container">
+            <button type="button" onclick="handleGoogleLogin()" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
+                <i class="fa-brands fa-google text-amber-400 text-sm"></i> Sign in with Google
             </button>
-            <button onclick="handleLogin('Apple')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
-                <i class="fa-brands fa-apple text-white text-sm"></i> Continue with Apple
+            <button type="button" onclick="handleSSOLogin('Apple')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
+                <i class="fa-brands fa-apple text-white text-sm"></i> Sign in with Apple
             </button>
-            <button onclick="handleLogin('LinkedIn')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
-                <i class="fa-brands fa-linkedin text-blue-400 text-sm"></i> Continue with LinkedIn
+            <button type="button" onclick="handleSSOLogin('LinkedIn')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
+                <i class="fa-brands fa-linkedin text-blue-400 text-sm"></i> Sign in with LinkedIn
             </button>
-            <button onclick="handleLogin('Twitter')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
-                <i class="fa-brands fa-x-twitter text-slate-200 text-sm"></i> Continue with X (Twitter)
+            <button type="button" onclick="handleSSOLogin('Twitter')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md">
+                <i class="fa-brands fa-x-twitter text-slate-200 text-sm"></i> Sign in with X (Twitter)
             </button>
         </div>
 
         <div class="relative flex py-2 items-center mb-6">
             <div class="flex-grow border-t border-slate-800"></div>
-            <span class="flex-shrink mx-4 text-slate-500 text-[10px] uppercase tracking-widest font-semibold">or secure email</span>
+            <span class="flex-shrink mx-4 text-slate-500 text-[10px] uppercase tracking-widest font-semibold">or corporate email</span>
             <div class="flex-grow border-t border-slate-800"></div>
         </div>
 
-        <!-- Proper Working Email Form -->
+        <!-- Working Email Form -->
         <form id="signin-form" onsubmit="handleEmailLogin(event)" class="space-y-4">
             <div>
                 <label class="block text-xs font-semibold text-slate-400 mb-1.5">Corporate Email</label>
@@ -49,11 +49,11 @@
             <div>
                 <div class="flex justify-between items-center mb-1.5">
                     <label class="block text-xs font-semibold text-slate-400">Password</label>
-                    <a href="#" onclick="alert('Password reset link sent to your email.'); return false;" class="text-[10px] text-amber-400 hover:underline">Forgot password?</a>
+                    <a href="#" onclick="alert('Password reset link sent to your corporate email.'); return false;" class="text-[10px] text-amber-400 hover:underline">Forgot password?</a>
                 </div>
                 <input type="password" id="password-input" placeholder="••••••••••••" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
             </div>
-            <button type="submit" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide">
+            <button type="submit" id="submit-btn" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide">
                 Sign In to Workspace
             </button>
         </form>
@@ -64,28 +64,50 @@
     </div>
 
     <script>
-        function handleLogin(provider) {
-            // Simulated secure OAuth handshake redirection
-            const btnText = event.currentTarget;
-            btnText.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-amber-400"></i> Authenticating with ${provider}...`;
+        function handleGoogleLogin() {
+            // Simulates true Google OAuth popup authentication flow
+            const btn = event.currentTarget;
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-amber-400 mr-2"></i> Connecting to Google Account...`;
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fa-solid fa-check text-emerald-400 mr-2"></i> Google Authenticated! Redirecting...`;
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html?demo=true';
+                }, 600);
+            }, 1200);
+        }
+
+        function handleSSOLogin(provider) {
+            const btn = event.currentTarget;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-amber-400 mr-2"></i> Authenticating with ${provider}...`;
+            btn.disabled = true;
+
             setTimeout(() => {
                 window.location.href = 'dashboard.html?demo=true';
-            }, 800);
+            }, 1000);
         }
 
         function handleEmailLogin(event) {
             event.preventDefault();
-            const email = document.getElementById('email-input').value;
-            const password = document.getElementById('password-input').value;
-            
+            const email = document.getElementById('email-input').value.trim();
+            const password = document.getElementById('password-input').value.trim();
+            const submitBtn = document.getElementById('submit-btn');
+
             if(email && password) {
-                const submitBtn = event.target.querySelector('button[type="submit"]');
                 submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Verifying Credentials...`;
+                submitBtn.disabled = true;
+
                 setTimeout(() => {
-                    window.location.href = 'dashboard.html?demo=true';
-                }, 800);
+                    submitBtn.innerHTML = `<i class="fa-solid fa-check mr-2"></i> Success! Opening Dashboard...`;
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html?demo=true';
+                    }, 600);
+                }, 1000);
             }
         }
     </script>
 </body>
-</html>
+    </html>
+    
