@@ -6,105 +6,70 @@
     <title>Sign In - VeloClient</title>
     <link rel="icon" type="image/svg+xml" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/bolt.svg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Include Supabase JS SDK -->
+    <!-- Supabase SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #090c10; }</style>
 </head>
-<body class="text-slate-100 antialiased flex items-center justify-center min-h-screen p-6 relative">
-    
-    <div class="bg-[#111622] border border-amber-500/20 rounded-3xl p-10 max-w-md w-full shadow-2xl relative overflow-hidden">
+<body class="text-slate-100 antialiased flex items-center justify-center min-h-screen p-6">
+    <div class="bg-[#111622] border border-amber-500/20 rounded-3xl p-10 max-w-md w-full shadow-2xl relative">
         <div class="text-center mb-8">
             <span class="inline-block text-3xl font-extrabold text-white tracking-tight">Velo<span class="text-amber-500">Client</span></span>
-            <p class="text-xs text-slate-400 mt-2">Secure Enterprise Client & Agency Portal</p>
+            <p class="text-xs text-slate-400 mt-2">Secure Enterprise Client Portal</p>
         </div>
 
-        <!-- Real Supabase OAuth Buttons -->
-        <div class="space-y-3 mb-6">
-            <button type="button" onclick="loginWithSupabase('google')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
-                <i class="fa-brands fa-google text-amber-400 text-sm"></i> Sign in with Google
-            </button>
-            <button type="button" onclick="loginWithSupabase('apple')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
-                <i class="fa-brands fa-apple text-white text-sm"></i> Sign in with Apple
-            </button>
-        </div>
-
-        <div class="relative flex py-2 items-center mb-6">
-            <div class="flex-grow border-t border-slate-800"></div>
-            <span class="flex-shrink mx-4 text-slate-500 text-[10px] uppercase tracking-widest font-semibold">or corporate email</span>
-            <div class="flex-grow border-t border-slate-800"></div>
-        </div>
-
-        <!-- Real Supabase Email Login/Sign Up Form -->
-        <form id="signin-form" onsubmit="handleSupabaseEmailAuth(event)" class="space-y-4">
+        <form onsubmit="handleAuth(event)" class="space-y-4">
             <div>
                 <label class="block text-xs font-semibold text-slate-400 mb-1.5">Corporate Email</label>
                 <input type="email" id="email-input" placeholder="name@enterprise.com" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 font-medium" required>
             </div>
             <div>
-                <input type="password" id="password-input" placeholder="Password (Min 6 chars)" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
+                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Password</label>
+                <input type="password" id="password-input" placeholder="••••••••••••" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
             </div>
-            <button type="submit" id="submit-btn" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
+            <button type="submit" id="submit-btn" class="w-full mt-4 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
                 Sign In / Register
             </button>
         </form>
 
         <p class="text-center text-[11px] text-slate-500 mt-6">
-            Powered by Supabase Auth &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
+            Secured by Supabase Database &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
         </p>
     </div>
 
     <script>
-        // Initialize Supabase Client (Replace with your actual Supabase project URL and Anon Key from supabase.com)
-        const SUPABASE_URL = 'https://fjtutrvsoohxvpnqfhgu.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_al-XL6fXqnQwYDI3H5_5Mg_umQC6orn';
+        // Replace with your actual Supabase URL and Publishable Anon Key
+        const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
         
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Real Google / Apple OAuth via Supabase
-        async function loginWithSupabase(providerName) {
-            try {
-                const { data, error } = await supabaseClient.auth.signInWithOAuth({
-                    provider: providerName,
-                    options: {
-                        redirectTo: window.location.origin + '/index.html'
-                    }
-                });
-                if (error) throw error;
-            } catch (err) {
-                alert("Supabase Authentication Error: " + err.message + "\n\n(Note: Please replace placeholder Supabase URL and Key with your project keys from supabase.com)");
-            }
-        }
-
-        // Real Email Sign In / Sign Up via Supabase
-        async function handleSupabaseEmailAuth(event) {
+        async function handleAuth(event) {
             event.preventDefault();
             const email = document.getElementById('email-input').value.trim();
             const password = document.getElementById('password-input').value.trim();
             const submitBtn = document.getElementById('submit-btn');
 
-            if(email && password) {
-                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Authenticating with Supabase...`;
-                submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Authenticating...`;
+            submitBtn.disabled = true;
 
-                try {
-                    // Try signing in first
-                    let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                    
-                    // If account doesn't exist, automatically sign them up
-                    if (error) {
-                        const signUpRes = await supabaseClient.auth.signUp({ email, password });
-                        if (signUpRes.error) throw signUpRes.error;
-                        alert("Account created successfully! Welcome to VeloClient.");
-                    }
-
-                    window.location.href = `index.html?email=${encodeURIComponent(email)}`;
-                } catch (err) {
-                    alert("Authentication Error: " + err.message);
-                    submitBtn.innerHTML = `Sign In / Register`;
-                    submitBtn.disabled = false;
+            try {
+                // Try logging in
+                let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                
+                // If user doesn't exist, automatically sign them up
+                if (error) {
+                    const signUpRes = await supabaseClient.auth.signUp({ email, password });
+                    if (signUpRes.error) throw signUpRes.error;
                 }
+
+                // Successful authentication -> Proceed to index.html home page in sequence
+                window.location.href = 'index.html';
+            } catch (err) {
+                alert("Authentication error: " + err.message);
+                submitBtn.innerHTML = `Sign In / Register`;
+                submitBtn.disabled = false;
             }
         }
     </script>
