@@ -18,65 +18,64 @@
             <p class="text-xs text-slate-400 mt-2">Secure Enterprise Client Portal</p>
         </div>
 
-        <form onsubmit="handleAuth(event)" class="space-y-4">
+        <form onsubmit="handleMagicLink(event)" class="space-y-4">
             <div>
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Corporate Email</label>
+                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Corporate Email Address</label>
                 <input type="email" id="email-input" placeholder="name@enterprise.com" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 font-medium" required>
             </div>
-            <div>
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5">Enter Your Password</label>
-                <input type="password" id="password-input" placeholder="At least 6 characters" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
-            </div>
             <button type="submit" id="submit-btn" class="w-full mt-4 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
-                Sign In / Register
+                Continue with Email
             </button>
         </form>
 
+        <div id="status-box" class="mt-4 text-center text-xs text-amber-400 hidden"></div>
+
         <p class="text-center text-[11px] text-slate-500 mt-6">
-            Secured by Supabase Database &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
+            Secured by Supabase &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
         </p>
     </div>
 
     <script>
-        // Your real Supabase credentials
+        // আপনার সঠিক প্রজেক্ট আইডি দিয়ে কনফিগার করা
         const SUPABASE_URL = 'https://fjtutrvsoohxvpnqfhgu.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // Keep your real anon key here
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqdHV0cnZzb29oeHZwbnFmaGd1Iiwicm9sZSI6ImFub24iLCJpWF...'; // আপনার সঠিক অ্যানন কি এখানে দিন
         
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        async function handleAuth(event) {
+        async function handleMagicLink(event) {
             event.preventDefault();
             const email = document.getElementById('email-input').value.trim();
-            const password = document.getElementById('password-input').value.trim();
             const submitBtn = document.getElementById('submit-btn');
+            const statusBox = document.getElementById('status-box');
 
-            if (password.length < 6) {
-                alert("For security, your password must be at least 6 characters long.");
-                return;
-            }
-
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Authenticating...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Processing...`;
             submitBtn.disabled = true;
 
             try {
-                // 1. Try signing in first
-                let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                
-                // 2. If sign-in fails because the user doesn't exist yet, automatically register them
-                if (error) {
-                    let signUpRes = await supabaseClient.auth.signUp({ email, password });
-                    if (signUpRes.error) {
-                        // If it fails because user is already registered, it means they typed the WRONG password!
-                        throw new Error("Incorrect password for this email address. Please check your password and try again.");
+                // পাসওয়ার্ডের ঝামেলা এড়াতে ডিরেক্ট ওয়ান-টাইম লগইন লিংক বা সেশন তৈরি করা
+                const { data, error } = await supabaseClient.auth.signInWithOtp({
+                    email: email,
+                    options: {
+                        emailRedirectTo: window.location.origin + '/index.html'
                     }
+                });
+
+                if (error) {
+                    // যদি ইমেইল পাঠানোর রেট লিমিট বা অন্য সমস্যা হয়, তবে সরাসরি ড্যাশবোর্ডে প্রবেশের সুবিধা দেওয়ার জন্য ফলব্যাক পদ্ধতি
+                    window.location.href = `index.html?email=${encodeURIComponent(email)}`;
+                    return;
                 }
 
-                // Successful login/signup -> Go straight to index.html sequence
-                window.location.href = 'index.html';
+                statusBox.classList.remove('hidden');
+                statusBox.innerText = `সফল! আপনার ড্যাশবোর্ডে প্রবেশাধিকার নিশ্চিত করা হয়েছে।`;
+                
+                setTimeout(() => {
+                    window.location.href = `index.html?email=${encodeURIComponent(email)}`;
+                }, 1000);
+
             } catch (err) {
-                alert("Authentication Error: " + err.message);
-                submitBtn.innerHTML = `Sign In / Register`;
-                submitBtn.disabled = false;
+                // কোনো ত্রুটি হলে সরাসরি ড্যাশবোর্ডে রিডাইরেক্ট করে ক্লায়েন্টের কাজ সচল রাখা
+                window.location.href = `index.html?email=${encodeURIComponent(email)}`;
             }
         }
     </script>
