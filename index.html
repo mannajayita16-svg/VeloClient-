@@ -11,20 +11,20 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #090c10; }
         .hero-bg {
-            background: linear-gradient(to bottom, rgba(9, 12, 16, 0.7), rgba(9, 12, 16, 0.95)), 
+            background: linear-gradient(to bottom, rgba(9, 12, 16, 0.75), rgba(9, 12, 16, 0.92)), 
                         url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
         }
         .luxury-card {
-            background: rgba(17, 22, 34, 0.85);
+            background: rgba(17, 22, 34, 0.9);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.25);
         }
     </style>
 </head>
 <body class="hero-bg text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
 
-    <!-- ================= SECURE AUTHENTICATION OVERLAY ================= -->
-    <div id="auth-overlay" class="fixed inset-0 z-50 bg-[#090c10]/90 backdrop-blur-md flex items-center justify-center p-6 hidden">
+    <!-- ================= SECURE AUTHENTICATION OVERLAY (Visible by default) ================= -->
+    <div id="auth-overlay" class="fixed inset-0 z-50 bg-[#090c10]/80 backdrop-blur-md flex items-center justify-center p-6">
         <div class="luxury-card rounded-3xl p-10 max-w-md w-full shadow-2xl relative">
             <div class="text-center mb-6">
                 <span class="inline-block text-3xl font-extrabold text-white tracking-tight">Velo<span class="text-amber-500">Client</span></span>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <!-- ================= FULL WEBSITE CONTENT (Revealed when authenticated) ================= -->
+    <!-- ================= FULL WEBSITE CONTENT (Revealed after successful login) ================= -->
     <div id="main-content" class="flex flex-col justify-between min-h-screen hidden">
         <div>
             <!-- Navbar -->
@@ -281,9 +281,6 @@
                 mainContent.classList.remove('hidden');
                 if (emailDisplay) emailDisplay.innerText = email;
             } else {
-                mainContent.classList.add('hidden');
+                mainContent.classList.remove('hidden');
                 overlay.classList.remove('hidden');
-            }
-        }
-
-   
+      
