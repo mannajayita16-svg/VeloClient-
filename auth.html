@@ -6,6 +6,8 @@
     <title>Sign In - VeloClient</title>
     <link rel="icon" type="image/svg+xml" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/bolt.svg">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Include Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #090c10; }</style>
@@ -18,19 +20,13 @@
             <p class="text-xs text-slate-400 mt-2">Secure Enterprise Client & Agency Portal</p>
         </div>
 
-        <!-- SSO Sign-In Buttons -->
+        <!-- Real Supabase OAuth Buttons -->
         <div class="space-y-3 mb-6">
-            <button type="button" onclick="openMultiAccountModal('Google')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
+            <button type="button" onclick="loginWithSupabase('google')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
                 <i class="fa-brands fa-google text-amber-400 text-sm"></i> Sign in with Google
             </button>
-            <button type="button" onclick="openMultiAccountModal('Apple')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
+            <button type="button" onclick="loginWithSupabase('apple')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
                 <i class="fa-brands fa-apple text-white text-sm"></i> Sign in with Apple
-            </button>
-            <button type="button" onclick="openMultiAccountModal('LinkedIn')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
-                <i class="fa-brands fa-linkedin text-blue-400 text-sm"></i> Sign in with LinkedIn
-            </button>
-            <button type="button" onclick="openMultiAccountModal('Twitter')" class="w-full bg-[#161d2d] hover:bg-[#1a2336] text-white font-semibold py-3.5 px-4 rounded-xl transition border border-slate-700 flex items-center justify-center gap-3 text-xs shadow-md cursor-pointer">
-                <i class="fa-brands fa-x-twitter text-slate-200 text-sm"></i> Sign in with X (Twitter)
             </button>
         </div>
 
@@ -40,101 +36,75 @@
             <div class="flex-grow border-t border-slate-800"></div>
         </div>
 
-        <form id="signin-form" onsubmit="handleEmailLogin(event)" class="space-y-4">
+        <!-- Real Supabase Email Login/Sign Up Form -->
+        <form id="signin-form" onsubmit="handleSupabaseEmailAuth(event)" class="space-y-4">
             <div>
                 <label class="block text-xs font-semibold text-slate-400 mb-1.5">Corporate Email</label>
                 <input type="email" id="email-input" placeholder="name@enterprise.com" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 font-medium" required>
             </div>
             <div>
-                <input type="password" id="password-input" placeholder="Password" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
+                <input type="password" id="password-input" placeholder="Password (Min 6 chars)" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500" required>
             </div>
             <button type="submit" id="submit-btn" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
-                Sign In to Workspace
+                Sign In / Register
             </button>
         </form>
-    </div>
 
-    <!-- Multi-Account Selection Modal -->
-    <div id="auth-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#111622] border border-slate-700 rounded-3xl p-8 max-w-sm w-full shadow-2xl space-y-6 text-center">
-            <div id="modal-content" class="space-y-4">
-                <!-- Dynamically populated multi-account list -->
-            </div>
-        </div>
+        <p class="text-center text-[11px] text-slate-500 mt-6">
+            Powered by Supabase Auth &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
+        </p>
     </div>
 
     <script>
-        const accountsList = [
-            { name: "Anik Manna", email: "anikmanna697@gmail.com", initials: "AM", color: "bg-amber-600" },
-            { name: "Jayita Kole", email: "jayita5628@gmail.com", initials: "JK", color: "bg-blue-600" },
-            { name: "Corporate Executive", email: "director@enterprise-corp.com", initials: "CE", color: "bg-emerald-600" },
-            { name: "Development Lead", email: "dev@veloclient.io", initials: "DL", color: "bg-indigo-600" }
-        ];
+        // Initialize Supabase Client (Replace with your actual Supabase project URL and Anon Key from supabase.com)
+        const SUPABASE_URL = 'http://sb_publishable_al-XL6fXqnQwYDI3H5_5Mg_umQC6orn.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_al-XL6fXqnQwYDI3H5_5Mg_umQC6orn';
+        
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        function openMultiAccountModal(provider) {
-            const modal = document.getElementById('auth-modal');
-            const content = document.getElementById('modal-content');
-            modal.classList.remove('hidden');
-
-            let html = `
-                <div class="flex flex-col items-center gap-2">
-                    <h3 class="text-base font-bold text-white">Choose an account</h3>
-                    <p class="text-xs text-slate-400">to continue to VeloClient via ${provider}</p>
-                </div>
-                <div class="space-y-2 text-left max-h-60 overflow-y-auto pr-1">
-            `;
-
-            accountsList.forEach(acc => {
-                html += `
-                    <div onclick="selectAndAuthorize('${provider}', '${acc.name}', '${acc.email}')" class="flex items-center gap-3 p-3 rounded-2xl bg-[#161d2d] hover:bg-[#1f293d] border border-slate-700 cursor-pointer transition">
-                        <div class="w-8 h-8 rounded-full ${acc.color} text-white font-bold flex items-center justify-center text-xs">${acc.initials}</div>
-                        <div class="overflow-hidden">
-                            <p class="text-xs font-bold text-white">${acc.name}</p>
-                            <p class="text-[10px] text-slate-400 truncate">${acc.email}</p>
-                        </div>
-                    </div>
-                `;
-            });
-
-            html += `
-                </div>
-                <button onclick="closeAuthModal()" class="text-xs text-slate-400 hover:text-white transition pt-2">Cancel</button>
-            `;
-            content.innerHTML = html;
+        // Real Google / Apple OAuth via Supabase
+        async function loginWithSupabase(providerName) {
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithOAuth({
+                    provider: providerName,
+                    options: {
+                        redirectTo: window.location.origin + '/index.html'
+                    }
+                });
+                if (error) throw error;
+            } catch (err) {
+                alert("Supabase Authentication Error: " + err.message + "\n\n(Note: Please replace placeholder Supabase URL and Key with your project keys from supabase.com)");
+            }
         }
 
-        function closeAuthModal() {
-            document.getElementById('auth-modal').classList.add('hidden');
-        }
-
-        function selectAndAuthorize(provider, name, email) {
-            const content = document.getElementById('modal-content');
-            content.innerHTML = `
-                <div class="py-8 space-y-4 text-center">
-                    <i class="fa-solid fa-spinner fa-spin text-amber-400 text-3xl"></i>
-                    <p class="text-sm font-bold text-white">Authorizing ${name} (${email})...</p>
-                    <p class="text-xs text-slate-400">Secure handshake with ${provider} SSO</p>
-                </div>
-            `;
-
-            setTimeout(() => {
-                // Sequence rule: After successful sign-in, redirect to index.html (Home Landing Page)
-                window.location.href = `index.html?user=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
-            }, 1200);
-        }
-
-        function handleEmailLogin(event) {
+        // Real Email Sign In / Sign Up via Supabase
+        async function handleSupabaseEmailAuth(event) {
             event.preventDefault();
             const email = document.getElementById('email-input').value.trim();
+            const password = document.getElementById('password-input').value.trim();
             const submitBtn = document.getElementById('submit-btn');
 
-            if(email) {
-                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Authenticating...`;
+            if(email && password) {
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Authenticating with Supabase...`;
                 submitBtn.disabled = true;
 
-                setTimeout(() => {
+                try {
+                    // Try signing in first
+                    let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                    
+                    // If account doesn't exist, automatically sign them up
+                    if (error) {
+                        const signUpRes = await supabaseClient.auth.signUp({ email, password });
+                        if (signUpRes.error) throw signUpRes.error;
+                        alert("Account created successfully! Welcome to VeloClient.");
+                    }
+
                     window.location.href = `index.html?email=${encodeURIComponent(email)}`;
-                }, 1000);
+                } catch (err) {
+                    alert("Authentication Error: " + err.message);
+                    submitBtn.innerHTML = `Sign In / Register`;
+                    submitBtn.disabled = false;
+                }
             }
         }
     </script>
