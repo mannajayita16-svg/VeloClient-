@@ -23,231 +23,209 @@
 </head>
 <body class="hero-bg text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
 
-    <!-- ================= LICENSE KEY ACCESS OVERLAY (Max 3 Devices) ================= -->
-    <div id="license-overlay" class="fixed inset-0 z-50 bg-[#090c10]/90 backdrop-blur-md flex items-center justify-center p-6 hidden">
-        <div class="luxury-card rounded-3xl p-10 max-w-md w-full shadow-2xl relative text-center">
-            <div class="mb-6">
-                <span class="inline-block text-3xl font-extrabold text-white tracking-tight">Velo<span class="text-amber-500">Client</span></span>
-                <p class="text-xs text-slate-400 mt-2">Enter your Lifetime License Key (Max 3 Devices Allowed)</p>
-            </div>
-
-            <form onsubmit="verifyLicenseKey(event)" class="space-y-4 text-left">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1.5">Secure License Key</label>
-                    <input type="text" id="license-input" placeholder="e.g., VELO-PRO-2026" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 font-mono uppercase" required>
+    <div>
+        <!-- Navbar -->
+        <nav class="sticky top-0 z-40 backdrop-blur-2xl bg-[#090c10]/90 border-b border-slate-800">
+            <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl font-extrabold tracking-tight text-white">Velo<span class="text-amber-500 font-normal">Client</span></span>
                 </div>
-                <button type="submit" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
-                    Activate Workspace
-                </button>
-            </form>
-
-            <p class="text-[11px] text-slate-500 mt-6">
-                Need help? <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Contact Support</a>
-            </p>
-        </div>
-    </div>
-
-    <!-- ================= MAIN WEBSITE CONTENT ================= -->
-    <div id="main-content" class="flex flex-col justify-between min-h-screen">
-        <div>
-            <!-- Navbar -->
-            <nav class="sticky top-0 z-40 backdrop-blur-2xl bg-[#090c10]/90 border-b border-slate-800">
-                <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <span class="text-2xl font-extrabold tracking-tight text-white">Velo<span class="text-amber-500 font-normal">Client</span></span>
-                    </div>
-                    <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
-                        <a href="#home" class="text-amber-400 font-semibold">Home</a>
-                        <a href="#showcase" class="hover:text-amber-400 transition">Gallery</a>
-                        <a href="#pricing" class="hover:text-amber-400 transition">Pricing</a>
-                        <button onclick="disconnectDevice()" class="hover:text-amber-400 transition cursor-pointer text-amber-500 font-semibold"><i class="fa-solid fa-key mr-1"></i> Switch Device</button>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="text-xs text-emerald-400 font-bold bg-emerald-950/50 px-4 py-2 rounded-xl border border-emerald-800/30"><i class="fa-solid fa-shield-check mr-1"></i> Device Synced (Max 3)</span>
-                    </div>
+                <div class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
+                    <a href="#home" class="text-amber-400 font-semibold">Home</a>
+                    <a href="#showcase" class="hover:text-amber-400 transition">Gallery</a>
+                    <a href="#pricing" class="hover:text-amber-400 transition">Pricing</a>
+                    <a href="#client-portal" class="hover:text-amber-400 transition text-amber-400 font-semibold"><i class="fa-solid fa-key mr-1"></i> Client Portal</a>
                 </div>
-            </nav>
-
-            <!-- Hero Section -->
-            <section id="home" class="hero-bg min-h-[85vh] flex items-center relative overflow-hidden py-24 px-8">
-                <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center w-full">
-                    <div class="lg:col-span-7 space-y-8">
-                        <div class="inline-flex items-center gap-2 bg-[#141a29] border border-amber-500/30 px-4 py-2 rounded-full text-xs font-semibold text-amber-300 shadow-xl">
-                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                            <span>AI Audit & Enterprise Pipeline Active</span>
-                        </div>
-                        
-                        <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-                            Onboard Clients <br>in Minutes, <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Not Hours.</span>
-                        </h1>
-                        
-                        <p class="text-slate-300 text-lg lg:text-xl max-w-2xl leading-relaxed font-normal">
-                            VeloClient automates your corporate client intake and AI audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict standards.
-                        </p>
-                        
-                        <div class="flex flex-wrap gap-5 items-center pt-4">
-                            <a href="#pricing" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-8 py-4 rounded-xl transition shadow-2xl shadow-amber-900/40 flex items-center gap-3 text-base">
-                                View Pricing Options <i class="fa-solid fa-arrow-right text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Visual Mockup Column (Live AI Audit Dashboard) -->
-                    <div class="lg:col-span-5 relative">
-                        <div class="absolute -inset-6 bg-gradient-to-tr from-amber-600/10 to-transparent rounded-3xl blur-3xl"></div>
-                        <div class="luxury-card rounded-3xl p-6 shadow-2xl relative border border-amber-500/20 space-y-5">
-                            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-                                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Executive Dashboard</span>
-                                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">AI Audit Complete</span>
-                            </div>
-                            <div class="space-y-3">
-                                <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-                                    <div><p class="text-xs text-slate-400">Corporate Client</p><p class="text-base font-bold text-white">Stark Industries</p></div>
-                                    <span class="text-xs text-emerald-400 font-bold bg-emerald-950/50 px-3 py-1 rounded-lg">Verified</span>
-                                </div>
-                                <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-                                    <div><p class="text-xs text-slate-400">AI File & Compliance Scan</p><p class="text-base font-bold text-amber-400">100% Complete</p></div>
-                                    <i class="fa-solid fa-shield-check text-amber-400 text-xl"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Aesthetic Gallery Showcase Section -->
-            <section id="showcase" class="py-20 bg-[#07090f] border-t border-slate-800/80 px-8">
-                <div class="max-w-7xl mx-auto">
-                    <div class="text-center max-w-3xl mx-auto mb-16">
-                        <h2 class="text-4xl font-extrabold tracking-tight text-white">Engineered for World-Class Operations</h2>
-                        <p class="text-slate-400 text-base mt-3">Designed with timeless elegance to command high corporate respect from global enterprises.</p>
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
-                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" alt="Workspace" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
-                                <div><p class="text-base font-bold text-white">Executive Control</p><p class="text-xs text-slate-400 mt-1">Manage global accounts with absolute clarity.</p></div>
-                            </div>
-                        </div>
-                        <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
-                            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop" alt="Security" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
-                                <div><p class="text-base font-bold text-white">Bank-Grade Privacy</p><p class="text-xs text-slate-400 mt-1">Secure escrow storage and encrypted asset transfers.</p></div>
-                            </div>
-                        </div>
-                        <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
-                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&auto=format&fit=crop" alt="Growth" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
-                                <div><p class="text-base font-bold text-white">Rapid Scaling</p><p class="text-xs text-slate-400 mt-1">Accelerate multi-million dollar client onboarding cycles.</p></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Pricing Section -->
-            <section id="pricing" class="py-20 bg-[#090c10] border-t border-slate-800 px-8 text-center">
-                <div class="max-w-3xl mx-auto">
-                    <h2 class="text-4xl font-extrabold text-white">Exclusive Lifetime Access</h2>
-                    <p class="text-slate-400 mt-3 text-base">Secure your enterprise pipeline license today (Includes up to 3 device syncs).</p>
-                    <div class="mt-10 luxury-card p-10 rounded-3xl border border-amber-500/30 inline-block w-full max-w-md shadow-2xl">
-                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Enterprise Pro</span>
-                        <div class="text-5xl font-extrabold text-white mt-4">$10,000 <span class="text-sm font-normal text-slate-400">/ lifetime</span></div>
-                        <p class="text-xs text-slate-400 mt-2">Unlimited clients, AI document auditing, and sync up to 3 personal devices.</p>
-                        <button onclick="alert('Checkout initialized! Your license key allowing up to 3 devices will be emailed instantly.')" class="mt-8 w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition cursor-pointer">Acquire License</button>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Embedded AI FAQ Chatbot Widget in Corner -->
-        <div class="fixed bottom-6 right-6 z-50">
-            <div id="chat-window" class="hidden bg-[#111622] border border-amber-500/30 rounded-3xl w-80 shadow-2xl overflow-hidden mb-4 flex flex-col">
-                <div class="bg-[#161d2d] p-4 border-b border-slate-800 flex justify-between items-center">
-                    <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div><span class="text-xs font-bold text-white">VeloClient AI Assistant</span></div>
-                    <button onclick="toggleChat()" class="text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div id="chat-messages" class="p-4 space-y-3 h-64 overflow-y-auto text-xs text-slate-300">
-                    <div class="bg-[#161d2d] p-3 rounded-xl border border-slate-800">Hello! Ask me about AI audits or our 3-device license policy.</div>
-                </div>
-                <div class="p-3 border-t border-slate-800 bg-[#090c10] flex gap-2">
-                    <input type="text" id="chat-input" placeholder="Ask a question..." class="w-full bg-[#111622] border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
-                    <button onclick="sendChatMessage()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-xl text-xs font-bold cursor-pointer">Send</button>
+                <div class="flex items-center gap-4">
+                    <span class="text-xs text-amber-400 font-bold bg-[#161d2d] px-4 py-2 rounded-xl border border-slate-800">Enterprise Edition</span>
                 </div>
             </div>
-            <button onclick="toggleChat()" class="bg-amber-600 hover:bg-amber-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-xl transition transform hover:scale-105 cursor-pointer">
-                <i class="fa-solid fa-comment-dots"></i>
-            </button>
-        </div>
+        </nav>
 
-        <footer class="bg-[#07090f] border-t border-slate-800 py-8 text-center text-xs text-slate-500">
-            &copy; VeloClient Protocol. All rights reserved.
-        </footer>
+        <!-- Hero Section -->
+        <section id="home" class="hero-bg min-h-[85vh] flex items-center relative overflow-hidden py-24 px-8">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center w-full">
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center gap-2 bg-[#141a29] border border-amber-500/30 px-4 py-2 rounded-full text-xs font-semibold text-amber-300 shadow-xl">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span>AI Audit & Enterprise Pipeline Active</span>
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+                        Onboard Clients <br>in Minutes, <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Not Hours.</span>
+                    </h1>
+                    
+                    <p class="text-slate-300 text-lg lg:text-xl max-w-2xl leading-relaxed font-normal">
+                        VeloClient automates your corporate client intake and AI audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict standards.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-5 items-center pt-4">
+                        <a href="#pricing" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-8 py-4 rounded-xl transition shadow-2xl shadow-amber-900/40 flex items-center gap-3 text-base">
+                            View Pricing Options <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Visual Mockup Column (Live AI Audit Dashboard) -->
+                <div class="lg:col-span-5 relative">
+                    <div class="absolute -inset-6 bg-gradient-to-tr from-amber-600/10 to-transparent rounded-3xl blur-3xl"></div>
+                    <div class="luxury-card rounded-3xl p-6 shadow-2xl relative border border-amber-500/20 space-y-5">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Executive Dashboard</span>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">AI Audit Complete</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
+                                <div><p class="text-xs text-slate-400">Corporate Client</p><p class="text-base font-bold text-white">Stark Industries</p></div>
+                                <span class="text-xs text-emerald-400 font-bold bg-emerald-950/50 px-3 py-1 rounded-lg">Verified</span>
+                            </div>
+                            <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
+                                <div><p class="text-xs text-slate-400">AI File & Compliance Scan</p><p class="text-base font-bold text-amber-400">100% Complete</p></div>
+                                <i class="fa-solid fa-shield-check text-amber-400 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aesthetic Gallery Showcase Section -->
+        <section id="showcase" class="py-20 bg-[#07090f] border-t border-slate-800/80 px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-4xl font-extrabold tracking-tight text-white">Engineered for World-Class Operations</h2>
+                    <p class="text-slate-400 text-base mt-3">Designed with timeless elegance to command high corporate respect from global enterprises.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop" alt="Workspace" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
+                            <div><p class="text-base font-bold text-white">Executive Control</p><p class="text-xs text-slate-400 mt-1">Manage global accounts with absolute clarity.</p></div>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop" alt="Security" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
+                            <div><p class="text-base font-bold text-white">Bank-Grade Privacy</p><p class="text-xs text-slate-400 mt-1">Secure escrow storage and encrypted asset transfers.</p></div>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden border border-slate-800 relative group shadow-2xl bg-[#111622]">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&auto=format&fit=crop" alt="Growth" class="w-full h-72 object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#090c10] via-[#090c10]/40 to-transparent flex items-end p-8">
+                            <div><p class="text-base font-bold text-white">Rapid Scaling</p><p class="text-xs text-slate-400 mt-1">Accelerate multi-million dollar client onboarding cycles.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 bg-[#090c10] border-t border-slate-800 px-8 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl font-extrabold text-white">Exclusive Lifetime Access</h2>
+                <p class="text-slate-400 mt-3 text-base">Secure your enterprise pipeline license today. Includes permission to sync up to 3 devices.</p>
+                <div class="mt-10 luxury-card p-10 rounded-3xl border border-amber-500/30 inline-block w-full max-w-md shadow-2xl">
+                    <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Enterprise Pro</span>
+                    <div class="text-5xl font-extrabold text-white mt-4">$10,000 <span class="text-sm font-normal text-slate-400">/ lifetime</span></div>
+                    <p class="text-xs text-slate-400 mt-2">Unlimited clients, AI document auditing, and license activation for up to 3 devices.</p>
+                    <button onclick="alert('Checkout initialized! Your license key will be delivered instantly upon payment confirmation.')" class="mt-8 w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition cursor-pointer">Acquire License</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Client Portal / 3-Device Activation Section -->
+        <section id="client-portal" class="py-20 bg-[#07090f] border-t border-slate-800 px-8">
+            <div class="max-w-xl mx-auto text-center">
+                <h2 class="text-3xl font-extrabold text-white">Client Portal Activation</h2>
+                <p class="text-slate-400 text-xs mt-2">Purchased a license? Enter your key below to sync this device (Max 3 devices per key).</p>
+                
+                <div class="mt-8 luxury-card p-8 rounded-3xl border border-amber-500/30 text-left shadow-2xl">
+                    <form onsubmit="verifyClientKey(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Your Lifetime License Key</label>
+                            <input type="text" id="portal-key-input" placeholder="e.g., VELO-PRO-2026" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 font-mono uppercase" required>
+                        </div>
+                        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3.5 rounded-xl transition text-sm cursor-pointer shadow-lg shadow-amber-900/30">
+                            Activate Device Slot
+                        </button>
+                    </form>
+                    <div id="portal-status" class="mt-4 text-xs font-semibold text-center text-slate-400">Status: Unsynchronized device</div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- ================= 3-DEVICE LICENSE ENFORCEMENT SCRIPT ================= -->
+    <!-- Embedded AI FAQ Chatbot Widget in Corner -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <div id="chat-window" class="hidden bg-[#111622] border border-amber-500/30 rounded-3xl w-80 shadow-2xl overflow-hidden mb-4 flex flex-col">
+            <div class="bg-[#161d2d] p-4 border-b border-slate-800 flex justify-between items-center">
+                <div class="flex items-center gap-2"><div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div><span class="text-xs font-bold text-white">VeloClient AI Assistant</span></div>
+                <button onclick="toggleChat()" class="text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="chat-messages" class="p-4 space-y-3 h-64 overflow-y-auto text-xs text-slate-300">
+                <div class="bg-[#161d2d] p-3 rounded-xl border border-slate-800">Hello! Ask me about AI audits or our 3-device license policy.</div>
+            </div>
+            <div class="p-3 border-t border-slate-800 bg-[#090c10] flex gap-2">
+                <input type="text" id="chat-input" placeholder="Ask a question..." class="w-full bg-[#111622] border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+                <button onclick="sendChatMessage()" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-xl text-xs font-bold cursor-pointer">Send</button>
+            </div>
+        </div>
+        <button onclick="toggleChat()" class="bg-amber-600 hover:bg-amber-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-xl transition transform hover:scale-105 cursor-pointer">
+            <i class="fa-solid fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <footer class="bg-[#07090f] border-t border-slate-800 py-8 text-center text-xs text-slate-500">
+        &copy; VeloClient Protocol. All rights reserved.
+    </footer>
+
+    <!-- ================= SCRIPT ================= -->
     <script>
-        // Valid license keys database
         const validKeys = ["VELO-PRO-2026", "ENTERPRISE-VIP", "VELOCLIENT-FOUNDER"];
 
-        function checkDeviceAccess() {
-            const isThisDeviceAuthorized = localStorage.getItem('veloclient_device_authorized');
-            const overlay = document.getElementById('license-overlay');
-
-            if (isThisDeviceAuthorized !== 'true') {
-                overlay.classList.remove('hidden');
-            } else {
-                overlay.classList.add('hidden');
+        window.addEventListener('DOMContentLoaded', () => {
+            const isAuthorized = localStorage.getItem('veloclient_device_active');
+            const statusDiv = document.getElementById('portal-status');
+            if (isAuthorized === 'true') {
+                statusDiv.innerHTML = '<span class="text-emerald-400 font-bold"><i class="fa-solid fa-shield-check"></i> Device successfully synced and authorized!</span>';
             }
-        }
+        });
 
-        function verifyLicenseKey(event) {
+        function verifyClientKey(event) {
             event.preventDefault();
-            const inputKey = document.getElementById('license-input').value.trim().toUpperCase();
+            const inputKey = document.getElementById('portal-key-input').value.trim().toUpperCase();
 
             if (!validKeys.includes(inputKey)) {
-                alert("Invalid license key. Please check your purchase confirmation email.");
+                alert("Invalid license key entered.");
                 return;
             }
 
-            // Check how many devices have already used this specific key
             let deviceRegistry = JSON.parse(localStorage.getItem(`key_devices_${inputKey}`) || "[]");
-            let myDeviceToken = localStorage.getItem('veloclient_my_device_id');
+            let myDeviceToken = localStorage.getItem('veloclient_device_token');
 
-            // Generate a unique token for this browser if it doesn't have one yet
             if (!myDeviceToken) {
-                myDeviceToken = 'dev_' + Math.random().toString(36.substring(2)) + Date.now();
-                localStorage.setItem('veloclient_my_device_id', myDeviceToken);
+                myDeviceToken = 'dev_' + Math.random().toString(36).substring(2) + Date.now();
+                localStorage.setItem('veloclient_device_token', myDeviceToken);
             }
 
-            // If this device is already registered under this key, let them in
             if (deviceRegistry.includes(myDeviceToken)) {
-                localStorage.setItem('veloclient_device_authorized', 'true');
-                alert("Welcome back! Device verified successfully.");
-                checkDeviceAccess();
+                localStorage.setItem('veloclient_device_active', 'true');
+                alert("This device is already registered under your key.");
+                location.reload();
                 return;
             }
 
-            // If maximum limit of 3 devices has been reached
             if (deviceRegistry.length >= 3) {
-                alert("Device Limit Reached!\nThis lifetime license key has already been activated on the maximum allowed limit of 3 devices.");
+                alert("Limit Reached: This license key has already been activated on the maximum allowed limit of 3 devices.");
                 return;
             }
 
-            // Otherwise, register this device into the slot
             deviceRegistry.push(myDeviceToken);
             localStorage.setItem(`key_devices_${inputKey}`, JSON.stringify(deviceRegistry));
-            localStorage.setItem('veloclient_device_authorized', 'true');
+            localStorage.setItem('veloclient_device_active', 'true');
             
-            alert(`Success! Device ${deviceRegistry.length} of 3 activated for this license key.`);
-            checkDeviceAccess();
-        }
-
-        function disconnectDevice() {
-            // Clears authorization on this specific browser device so another slot/key can be tested
-            localStorage.removeItem('veloclient_device_authorized');
-            alert("This device has been unlinked from the workspace.");
-            checkDeviceAccess();
+            alert(`Success! Device ${deviceRegistry.length} of 3 registered for this key.`);
+            location.reload();
         }
 
         function toggleChat() {
@@ -271,7 +249,7 @@
                 const aiMsg = document.createElement('div');
                 aiMsg.className = "bg-[#161d2d] p-3 rounded-xl border border-slate-800 text-slate-300";
                 if(txt.includes('device') || txt.includes('limit') || txt.includes('3')) {
-                    aiMsg.innerText = "Each lifetime license key allows activation across up to 3 separate devices securely.";
+                    aiMsg.innerText = "Each lifetime license key allows activation across up to 3 separate devices.";
                 } else if(txt.includes('audit') || txt.includes('ai')) {
                     aiMsg.innerText = "The built-in AI audit automatically scans client files and compliance requirements in seconds.";
                 } else {
@@ -281,10 +259,7 @@
                 msgContainer.scrollTop = msgContainer.scrollHeight;
             }, 500);
         }
-
-        // Run check immediately when page loads
-        checkDeviceAccess();
     </script>
 </body>
     </html>
-
+    
