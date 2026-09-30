@@ -24,7 +24,7 @@
 <body class="hero-bg text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
 
     <div>
-        <!-- Navbar -->
+        <!-- Navbar (Cleaned: No Enterprise Edition badge button) -->
         <nav class="sticky top-0 z-40 backdrop-blur-2xl bg-[#090c10]/95 border-b border-slate-800">
             <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -32,38 +32,31 @@
                 </div>
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
                     <a href="#home" class="text-amber-400 font-semibold">Home</a>
-                    <a href="#showcase" class="hover:text-amber-400 transition">Gallery</a>
-                    <a href="#pricing" class="hover:text-amber-400 transition">Pricing</a>
+                    <a href="pricing.html" class="hover:text-amber-400 transition">Pricing</a>
+                    <a href="dashboard.html" class="hover:text-amber-400 transition">Dashboard</a>
+                    <a href="auth.html" class="hover:text-amber-400 transition">Sign In</a>
                     <a href="#client-portal" class="hover:text-amber-400 transition text-amber-400 font-semibold"><i class="fa-solid fa-key mr-1"></i> Client Portal</a>
-                </div>
-                <div class="flex items-center gap-4">
-                    <span class="text-xs text-amber-400 font-semibold bg-[#161d2d] px-3 py-1.5 border border-slate-800 rounded">Enterprise Edition</span>
                 </div>
             </div>
         </nav>
 
-        <!-- Hero Section -->
+        <!-- Hero Section (Cleaned: Removed top badge block) -->
         <section id="home" class="hero-bg min-h-[85vh] flex items-center relative overflow-hidden py-20 px-8">
             <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 bg-[#141a29] border border-amber-500/30 px-3 py-1.5 text-xs font-semibold text-amber-300 rounded">
-                        <span class="w-2 h-2 bg-amber-400"></span>
-                        <span>AI Audit & Enterprise Pipeline Active</span>
-                    </div>
-                    
                     <h1 class="text-4xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
                         Onboard Clients <br>in Minutes, <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Not Hours.</span>
                     </h1>
                     
                     <p class="text-slate-300 text-base lg:text-lg max-w-2xl leading-relaxed">
-                        VeloClient automates your corporate client intake and AI audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict standards.
+                        VeloClient automates your corporate client intake and audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict standards.
                     </p>
                     
                     <div class="flex flex-wrap gap-4 items-center pt-2">
-                        <a href="#pricing" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-6 py-3 transition text-sm rounded shadow-md">
+                        <a href="pricing.html" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-6 py-3 transition text-sm rounded shadow-md">
                             View Pricing Options <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
                         </a>
-                        <button onclick="loadDemoAccount()" class="bg-[#161d2d] hover:bg-[#1f293d] text-slate-200 border border-slate-700 font-semibold px-6 py-3 transition text-sm rounded">
+                        <button onclick="loadDemoAccount()" class="bg-[#161d2d] hover:bg-[#1f293d] text-slate-200 border border-slate-700 font-semibold px-6 py-3 transition text-sm rounded cursor-pointer">
                             <i class="fa-solid fa-user-shield text-amber-400 mr-1.5"></i> Load Demo Account
                         </button>
                     </div>
@@ -121,7 +114,7 @@
             </div>
         </section>
 
-        <!-- Pricing Section (Containing both $199 and $10,000 plans) -->
+        <!-- Pricing Section ($199 and $10,000 plans) -->
         <section id="pricing" class="py-16 bg-[#090c10] border-t border-slate-800 px-8 text-center">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-3xl font-extrabold text-white">Exclusive Access Tiers</h2>
@@ -135,9 +128,9 @@
                             <div class="text-4xl font-extrabold text-white mt-3">$199 <span class="text-xs font-normal text-slate-400">/ standard license</span></div>
                             <p class="text-xs text-slate-400 mt-2">Ideal for growing firms. Includes basic AI document audit and sync up to 3 personal devices.</p>
                         </div>
-                        <button onclick="alert('Checkout initialized for Standard Tier ($199)! Your 3-device license key will be sent via email.')" class="mt-8 w-full bg-[#161d2d] hover:bg-amber-600 text-white font-bold py-3 transition text-sm rounded border border-slate-700 cursor-pointer">
+                        <a href="checkout.html?plan=199" class="mt-8 block text-center bg-[#161d2d] hover:bg-amber-600 text-white font-bold py-3 transition text-sm rounded border border-slate-700 cursor-pointer">
                             Acquire Standard License
-                        </button>
+                        </a>
                     </div>
 
                     <!-- $10,000 Lifetime Plan -->
@@ -147,9 +140,9 @@
                             <div class="text-4xl font-extrabold text-white mt-3">$10,000 <span class="text-xs font-normal text-slate-400">/ lifetime</span></div>
                             <p class="text-xs text-slate-400 mt-2">Unlimited clients, priority AI document auditing, VIP support, and sync up to 3 devices.</p>
                         </div>
-                        <button onclick="alert('Checkout initialized for Enterprise Pro ($10,000)! Your lifetime key supporting 3 devices will be delivered instantly.')" class="mt-8 w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 transition text-sm rounded cursor-pointer shadow-md">
+                        <a href="checkout.html?plan=10000" class="mt-8 block text-center bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 transition text-sm rounded cursor-pointer shadow-md">
                             Acquire Lifetime License
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -291,5 +284,4 @@
         }
     </script>
 </body>
-                    </html>
-            
+</html>
