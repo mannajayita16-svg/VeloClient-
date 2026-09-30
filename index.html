@@ -15,63 +15,40 @@
                         url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
         }
         .luxury-card {
-            background: rgba(17, 22, 34, 0.92);
+            background: rgba(17, 22, 34, 0.9);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.25);
         }
-        .req-met { color: #34d399 !important; }
-        .req-unmet { color: #94a3b8 !important; }
     </style>
 </head>
 <body class="hero-bg text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
 
-    <!-- ================= SECURE AUTHENTICATION OVERLAY ================= -->
-    <div id="auth-overlay" class="fixed inset-0 z-50 bg-[#090c10]/85 backdrop-blur-md flex items-center justify-center p-6">
-        <div class="luxury-card rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
-            <div class="text-center mb-6">
+    <!-- ================= LICENSE KEY ACCESS OVERLAY (Max 3 Devices) ================= -->
+    <div id="license-overlay" class="fixed inset-0 z-50 bg-[#090c10]/90 backdrop-blur-md flex items-center justify-center p-6 hidden">
+        <div class="luxury-card rounded-3xl p-10 max-w-md w-full shadow-2xl relative text-center">
+            <div class="mb-6">
                 <span class="inline-block text-3xl font-extrabold text-white tracking-tight">Velo<span class="text-amber-500">Client</span></span>
-                <p class="text-xs text-slate-400 mt-2">Secure Enterprise Client Portal</p>
+                <p class="text-xs text-slate-400 mt-2">Enter your Lifetime License Key (Max 3 Devices Allowed)</p>
             </div>
 
-            <!-- Mode Switcher Tabs -->
-            <div class="flex bg-[#090c10] p-1 rounded-2xl mb-6 border border-slate-800">
-                <button type="button" id="tab-signin" onclick="switchMode('signin')" class="flex-1 py-2.5 text-xs font-bold rounded-xl bg-amber-600 text-white transition cursor-pointer">Sign In</button>
-                <button type="button" id="tab-register" onclick="switchMode('register')" class="flex-1 py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition cursor-pointer">Register</button>
-            </div>
-
-            <form onsubmit="handleAuthAction(event)" class="space-y-4">
+            <form onsubmit="verifyLicenseKey(event)" class="space-y-4 text-left">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1.5">Corporate Email</label>
-                    <input type="email" id="email-input" placeholder="name@enterprise.com" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500 font-medium" required>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1.5">Secure License Key</label>
+                    <input type="text" id="license-input" placeholder="e.g., VELO-PRO-2026" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-amber-500 font-mono uppercase" required>
                 </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1.5">Secure Password</label>
-                    <input type="password" id="password-input" oninput="checkPasswordCriteriaLive(this.value)" placeholder="Enter secure password" class="w-full bg-[#090c10] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500" required>
-                </div>
-
-                <!-- Real-Time Password Criteria Checklist Dropdown (Visible during Register mode) -->
-                <div id="password-criteria-box" class="hidden bg-[#090c10]/80 p-3.5 rounded-xl border border-slate-800 text-[11px] space-y-1.5">
-                    <p class="font-bold text-slate-300 mb-1">Password Requirements:</p>
-                    <div id="req-len" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least 8 characters</div>
-                    <div id="req-upper" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least one uppercase letter (A-Z)</div>
-                    <div id="req-lower" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least one lowercase letter (a-z)</div>
-                    <div id="req-num" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least one number (0-9)</div>
-                    <div id="req-special" class="req-unmet flex items-center gap-2"><i class="fa-solid fa-circle text-[6px]"></i> At least one special symbol (!@#$...)</div>
-                </div>
-
-                <button type="submit" id="submit-btn" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
-                    Sign In to Workspace
+                <button type="submit" class="w-full mt-2 bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-amber-900/30 text-sm tracking-wide cursor-pointer">
+                    Activate Workspace
                 </button>
             </form>
 
-            <p class="text-center text-[11px] text-slate-500 mt-5">
-                Encrypted Client Isolation &bull; <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Support</a>
+            <p class="text-[11px] text-slate-500 mt-6">
+                Need help? <a href="mailto:anikmanna697@gmail.com" class="text-amber-400 hover:underline">Contact Support</a>
             </p>
         </div>
     </div>
 
-    <!-- ================= FULL WEBSITE CONTENT ================= -->
-    <div id="main-content" class="flex flex-col justify-between min-h-screen hidden">
+    <!-- ================= MAIN WEBSITE CONTENT ================= -->
+    <div id="main-content" class="flex flex-col justify-between min-h-screen">
         <div>
             <!-- Navbar -->
             <nav class="sticky top-0 z-40 backdrop-blur-2xl bg-[#090c10]/90 border-b border-slate-800">
@@ -83,10 +60,10 @@
                         <a href="#home" class="text-amber-400 font-semibold">Home</a>
                         <a href="#showcase" class="hover:text-amber-400 transition">Gallery</a>
                         <a href="#pricing" class="hover:text-amber-400 transition">Pricing</a>
-                        <button onclick="logout()" class="hover:text-amber-400 transition cursor-pointer">Sign Out</button>
+                        <button onclick="disconnectDevice()" class="hover:text-amber-400 transition cursor-pointer text-amber-500 font-semibold"><i class="fa-solid fa-key mr-1"></i> Switch Device</button>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span id="user-email-display" class="text-xs text-amber-400 font-bold bg-[#161d2d] px-4 py-2 rounded-xl border border-slate-800">User</span>
+                        <span class="text-xs text-emerald-400 font-bold bg-emerald-950/50 px-4 py-2 rounded-xl border border-emerald-800/30"><i class="fa-solid fa-shield-check mr-1"></i> Device Synced (Max 3)</span>
                     </div>
                 </div>
             </nav>
@@ -97,7 +74,7 @@
                     <div class="lg:col-span-7 space-y-8">
                         <div class="inline-flex items-center gap-2 bg-[#141a29] border border-amber-500/30 px-4 py-2 rounded-full text-xs font-semibold text-amber-300 shadow-xl">
                             <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                            <span>Encrypted Enterprise Session Active</span>
+                            <span>AI Audit & Enterprise Pipeline Active</span>
                         </div>
                         
                         <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
@@ -105,7 +82,7 @@
                         </h1>
                         
                         <p class="text-slate-300 text-lg lg:text-xl max-w-2xl leading-relaxed font-normal">
-                            VeloClient automates your corporate client intake and audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict NDA standards.
+                            VeloClient automates your corporate client intake and AI audit pipeline with elite precision — eliminating messy email threads and protecting sensitive data under strict standards.
                         </p>
                         
                         <div class="flex flex-wrap gap-5 items-center pt-4">
@@ -115,21 +92,21 @@
                         </div>
                     </div>
 
-                    <!-- Visual Mockup Column -->
+                    <!-- Visual Mockup Column (Live AI Audit Dashboard) -->
                     <div class="lg:col-span-5 relative">
                         <div class="absolute -inset-6 bg-gradient-to-tr from-amber-600/10 to-transparent rounded-3xl blur-3xl"></div>
                         <div class="luxury-card rounded-3xl p-6 shadow-2xl relative border border-amber-500/20 space-y-5">
                             <div class="flex items-center justify-between pb-4 border-b border-slate-800">
-                                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Enterprise Portal</span>
-                                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">Verified Secure</span>
+                                <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Executive Dashboard</span>
+                                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full font-semibold">AI Audit Complete</span>
                             </div>
                             <div class="space-y-3">
                                 <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
                                     <div><p class="text-xs text-slate-400">Corporate Client</p><p class="text-base font-bold text-white">Stark Industries</p></div>
-                                    <span class="text-xs text-emerald-400 font-bold bg-emerald-950/50 px-3 py-1 rounded-lg">Active</span>
+                                    <span class="text-xs text-emerald-400 font-bold bg-emerald-950/50 px-3 py-1 rounded-lg">Verified</span>
                                 </div>
                                 <div class="bg-[#161d2d] p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
-                                    <div><p class="text-xs text-slate-400">Asset Audit Status</p><p class="text-base font-bold text-amber-400">100% Complete</p></div>
+                                    <div><p class="text-xs text-slate-400">AI File & Compliance Scan</p><p class="text-base font-bold text-amber-400">100% Complete</p></div>
                                     <i class="fa-solid fa-shield-check text-amber-400 text-xl"></i>
                                 </div>
                             </div>
@@ -172,12 +149,12 @@
             <section id="pricing" class="py-20 bg-[#090c10] border-t border-slate-800 px-8 text-center">
                 <div class="max-w-3xl mx-auto">
                     <h2 class="text-4xl font-extrabold text-white">Exclusive Lifetime Access</h2>
-                    <p class="text-slate-400 mt-3 text-base">Secure your enterprise pipeline license today.</p>
+                    <p class="text-slate-400 mt-3 text-base">Secure your enterprise pipeline license today (Includes up to 3 device syncs).</p>
                     <div class="mt-10 luxury-card p-10 rounded-3xl border border-amber-500/30 inline-block w-full max-w-md shadow-2xl">
                         <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Enterprise Pro</span>
                         <div class="text-5xl font-extrabold text-white mt-4">$10,000 <span class="text-sm font-normal text-slate-400">/ lifetime</span></div>
-                        <p class="text-xs text-slate-400 mt-2">Unlimited clients, custom onboarding scripts, and priority NDA support.</p>
-                        <button onclick="alert('Checkout integration initialized successfully!')" class="mt-8 w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition cursor-pointer">Acquire License</button>
+                        <p class="text-xs text-slate-400 mt-2">Unlimited clients, AI document auditing, and sync up to 3 personal devices.</p>
+                        <button onclick="alert('Checkout initialized! Your license key allowing up to 3 devices will be emailed instantly.')" class="mt-8 w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-4 rounded-xl transition cursor-pointer">Acquire License</button>
                     </div>
                 </div>
             </section>
@@ -191,7 +168,7 @@
                     <button onclick="toggleChat()" class="text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div id="chat-messages" class="p-4 space-y-3 h-64 overflow-y-auto text-xs text-slate-300">
-                    <div class="bg-[#161d2d] p-3 rounded-xl border border-slate-800">Hello! Ask me anything about VeloClient pricing or security features.</div>
+                    <div class="bg-[#161d2d] p-3 rounded-xl border border-slate-800">Hello! Ask me about AI audits or our 3-device license policy.</div>
                 </div>
                 <div class="p-3 border-t border-slate-800 bg-[#090c10] flex gap-2">
                     <input type="text" id="chat-input" placeholder="Ask a question..." class="w-full bg-[#111622] border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
@@ -208,66 +185,106 @@
         </footer>
     </div>
 
-    <!-- ================= BULLETPROOF APP SCRIPT ================= -->
+    <!-- ================= 3-DEVICE LICENSE ENFORCEMENT SCRIPT ================= -->
     <script>
-        let currentAuthMode = 'signin';
+        // Valid license keys database
+        const validKeys = ["VELO-PRO-2026", "ENTERPRISE-VIP", "VELOCLIENT-FOUNDER"];
 
-        function switchMode(mode) {
-            currentAuthMode = mode;
-            const signinBtn = document.getElementById('tab-signin');
-            const registerBtn = document.getElementById('tab-register');
-            const submitBtn = document.getElementById('submit-btn');
-            const criteriaBox = document.getElementById('password-criteria-box');
+        function checkDeviceAccess() {
+            const isThisDeviceAuthorized = localStorage.getItem('veloclient_device_authorized');
+            const overlay = document.getElementById('license-overlay');
 
-            if (mode === 'signin') {
-                signinBtn.className = "flex-1 py-2.5 text-xs font-bold rounded-xl bg-amber-600 text-white transition cursor-pointer";
-                registerBtn.className = "flex-1 py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition cursor-pointer";
-                submitBtn.innerText = "Sign In to Workspace";
-                criteriaBox.classList.add('hidden');
+            if (isThisDeviceAuthorized !== 'true') {
+                overlay.classList.remove('hidden');
             } else {
-                registerBtn.className = "flex-1 py-2.5 text-xs font-bold rounded-xl bg-amber-600 text-white transition cursor-pointer";
-                signinBtn.className = "flex-1 py-2.5 text-xs font-bold rounded-xl text-slate-400 hover:text-white transition cursor-pointer";
-                submitBtn.innerText = "Register Account";
-                criteriaBox.classList.remove('hidden');
+                overlay.classList.add('hidden');
             }
         }
 
-        // Real-Time Visual Password Criteria Checklist
-        function checkPasswordCriteriaLive(password) {
-            if (currentAuthMode !== 'register') return;
-
-            const isLen = password.length >= 8;
-            const isUpper = /[A-Z]/.test(password);
-            const isLower = /[a-z]/.test(password);
-            const isNum = /[0-9]/.test(password);
-            const isSpecial = /[^A-Za-z0-9]/.test(password);
-
-            updateCriteriaLine('req-len', isLen);
-            updateCriteriaLine('req-upper', isUpper);
-            updateCriteriaLine('req-lower', isLower);
-            updateCriteriaLine('req-num', isNum);
-            updateCriteriaLine('req-special', isSpecial);
-        }
-
-        function updateCriteriaLine(elementId, isValid) {
-            const el = document.getElementById(elementId);
-            if (isValid) {
-                el.className = "req-met flex items-center gap-2";
-                el.innerHTML = `<i class="fa-solid fa-check text-[10px]"></i> ` + el.innerText.replace(/^[✓•]\s*/, '');
-            } else {
-                el.className = "req-unmet flex items-center gap-2";
-                el.innerHTML = `<i class="fa-solid fa-circle text-[6px]"></i> ` + el.innerText.replace(/^[✓•]\s*/, '');
-            }
-        }
-
-        function handleAuthAction(event) {
+        function verifyLicenseKey(event) {
             event.preventDefault();
-            const email = document.getElementById('email-input').value.trim().toLowerCase();
-            const password = document.getElementById('password-input').value.trim();
+            const inputKey = document.getElementById('license-input').value.trim().toUpperCase();
 
-            if (!email) {
-                alert("Please enter a valid email address.");
+            if (!validKeys.includes(inputKey)) {
+                alert("Invalid license key. Please check your purchase confirmation email.");
                 return;
             }
 
-            const storageKey
+            // Check how many devices have already used this specific key
+            let deviceRegistry = JSON.parse(localStorage.getItem(`key_devices_${inputKey}`) || "[]");
+            let myDeviceToken = localStorage.getItem('veloclient_my_device_id');
+
+            // Generate a unique token for this browser if it doesn't have one yet
+            if (!myDeviceToken) {
+                myDeviceToken = 'dev_' + Math.random().toString(36.substring(2)) + Date.now();
+                localStorage.setItem('veloclient_my_device_id', myDeviceToken);
+            }
+
+            // If this device is already registered under this key, let them in
+            if (deviceRegistry.includes(myDeviceToken)) {
+                localStorage.setItem('veloclient_device_authorized', 'true');
+                alert("Welcome back! Device verified successfully.");
+                checkDeviceAccess();
+                return;
+            }
+
+            // If maximum limit of 3 devices has been reached
+            if (deviceRegistry.length >= 3) {
+                alert("Device Limit Reached!\nThis lifetime license key has already been activated on the maximum allowed limit of 3 devices.");
+                return;
+            }
+
+            // Otherwise, register this device into the slot
+            deviceRegistry.push(myDeviceToken);
+            localStorage.setItem(`key_devices_${inputKey}`, JSON.stringify(deviceRegistry));
+            localStorage.setItem('veloclient_device_authorized', 'true');
+            
+            alert(`Success! Device ${deviceRegistry.length} of 3 activated for this license key.`);
+            checkDeviceAccess();
+        }
+
+        function disconnectDevice() {
+            // Clears authorization on this specific browser device so another slot/key can be tested
+            localStorage.removeItem('veloclient_device_authorized');
+            alert("This device has been unlinked from the workspace.");
+            checkDeviceAccess();
+        }
+
+        function toggleChat() {
+            document.getElementById('chat-window').classList.toggle('hidden');
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const msgContainer = document.getElementById('chat-messages');
+            if(!input.value.trim()) return;
+            
+            const userMsg = document.createElement('div');
+            userMsg.className = "bg-amber-600/20 text-amber-200 p-3 rounded-xl ml-auto max-w-[80%] border border-amber-500/20";
+            userMsg.innerText = input.value;
+            msgContainer.appendChild(userMsg);
+            
+            const txt = input.value.toLowerCase();
+            input.value = '';
+            
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = "bg-[#161d2d] p-3 rounded-xl border border-slate-800 text-slate-300";
+                if(txt.includes('device') || txt.includes('limit') || txt.includes('3')) {
+                    aiMsg.innerText = "Each lifetime license key allows activation across up to 3 separate devices securely.";
+                } else if(txt.includes('audit') || txt.includes('ai')) {
+                    aiMsg.innerText = "The built-in AI audit automatically scans client files and compliance requirements in seconds.";
+                } else {
+                    aiMsg.innerText = "For custom enterprise inquiries, reach out directly to anikmanna697@gmail.com.";
+                }
+                msgContainer.appendChild(aiMsg);
+                msgContainer.scrollTop = msgContainer.scrollHeight;
+            }, 500);
+        }
+
+        // Run check immediately when page loads
+        checkDeviceAccess();
+    </script>
+</body>
+    </html>
+
