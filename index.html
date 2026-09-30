@@ -24,14 +24,14 @@
 <body class="hero-bg text-slate-100 antialiased selection:bg-amber-600 selection:text-white min-h-screen flex flex-col justify-between">
 
     <div>
-        <!-- Navbar (Cleaned: No Enterprise Edition badge button) -->
+        <!-- Navbar linking directly to your existing separate repository files -->
         <nav class="sticky top-0 z-40 backdrop-blur-2xl bg-[#090c10]/95 border-b border-slate-800">
             <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <span class="text-2xl font-bold tracking-tight text-white">Velo<span class="text-amber-500 font-normal">Client</span></span>
                 </div>
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-                    <a href="#home" class="text-amber-400 font-semibold">Home</a>
+                    <a href="index.html" class="text-amber-400 font-semibold">Home</a>
                     <a href="pricing.html" class="hover:text-amber-400 transition">Pricing</a>
                     <a href="dashboard.html" class="hover:text-amber-400 transition">Dashboard</a>
                     <a href="auth.html" class="hover:text-amber-400 transition">Sign In</a>
@@ -40,7 +40,7 @@
             </div>
         </nav>
 
-        <!-- Hero Section (Cleaned: Removed top badge block) -->
+        <!-- Hero Section -->
         <section id="home" class="hero-bg min-h-[85vh] flex items-center relative overflow-hidden py-20 px-8">
             <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center w-full">
                 <div class="lg:col-span-7 space-y-6">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                <!-- Visual Mockup Column (Live AI Audit Dashboard) -->
+                <!-- Visual Mockup Column -->
                 <div class="lg:col-span-5 relative">
                     <div class="sharp-card p-6 shadow-2xl relative space-y-4">
                         <div class="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -84,7 +84,7 @@
             </div>
         </section>
 
-        <!-- Aesthetic Gallery Showcase Section -->
+        <!-- Gallery Showcase Section -->
         <section id="showcase" class="py-16 bg-[#07090f] border-t border-slate-800 px-8">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center max-w-2xl mx-auto mb-12">
@@ -114,41 +114,7 @@
             </div>
         </section>
 
-        <!-- Pricing Section ($199 and $10,000 plans) -->
-        <section id="pricing" class="py-16 bg-[#090c10] border-t border-slate-800 px-8 text-center">
-            <div class="max-w-5xl mx-auto">
-                <h2 class="text-3xl font-extrabold text-white">Exclusive Access Tiers</h2>
-                <p class="text-slate-400 mt-2 text-sm">Choose your pipeline license. All licenses support synchronization across up to 3 devices.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 mt-10 text-left">
-                    <!-- $199 Plan -->
-                    <div class="sharp-card p-8 shadow-xl flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Standard Tier</span>
-                            <div class="text-4xl font-extrabold text-white mt-3">$199 <span class="text-xs font-normal text-slate-400">/ standard license</span></div>
-                            <p class="text-xs text-slate-400 mt-2">Ideal for growing firms. Includes basic AI document audit and sync up to 3 personal devices.</p>
-                        </div>
-                        <a href="checkout.html?plan=199" class="mt-8 block text-center bg-[#161d2d] hover:bg-amber-600 text-white font-bold py-3 transition text-sm rounded border border-slate-700 cursor-pointer">
-                            Acquire Standard License
-                        </a>
-                    </div>
-
-                    <!-- $10,000 Lifetime Plan -->
-                    <div class="sharp-card p-8 shadow-xl flex flex-col justify-between border-amber-500/50">
-                        <div>
-                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Enterprise Pro</span>
-                            <div class="text-4xl font-extrabold text-white mt-3">$10,000 <span class="text-xs font-normal text-slate-400">/ lifetime</span></div>
-                            <p class="text-xs text-slate-400 mt-2">Unlimited clients, priority AI document auditing, VIP support, and sync up to 3 devices.</p>
-                        </div>
-                        <a href="checkout.html?plan=10000" class="mt-8 block text-center bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 transition text-sm rounded cursor-pointer shadow-md">
-                            Acquire Lifetime License
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Client Portal / 3-Device Activation Section -->
+        <!-- Client Portal Activation Section (3-Device Limit) -->
         <section id="client-portal" class="py-16 bg-[#07090f] border-t border-slate-800 px-8">
             <div class="max-w-xl mx-auto text-center">
                 <h2 class="text-2xl font-extrabold text-white">Client Portal Activation</h2>
@@ -170,7 +136,7 @@
         </section>
     </div>
 
-    <!-- Embedded AI FAQ Chatbot Widget in Corner -->
+    <!-- Embedded AI Chatbot Widget -->
     <div class="fixed bottom-6 right-6 z-50">
         <div id="chat-window" class="hidden bg-[#111622] border border-amber-500/30 w-72 shadow-2xl overflow-hidden mb-3 flex flex-col rounded">
             <div class="bg-[#161d2d] p-3 border-b border-slate-800 flex justify-between items-center">
@@ -178,7 +144,7 @@
                 <button onclick="toggleChat()" class="text-slate-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div id="chat-messages" class="p-3 space-y-2 h-56 overflow-y-auto text-xs text-slate-300">
-                <div class="bg-[#161d2d] p-2.5 border border-slate-800 rounded">Hello! Ask me about our $199 plan, $10k lifetime tier, or 3-device policy.</div>
+                <div class="bg-[#161d2d] p-2.5 border border-slate-800 rounded">Hello! Ask me about our pricing tiers or 3-device policy.</div>
             </div>
             <div class="p-2.5 border-t border-slate-800 bg-[#090c10] flex gap-2">
                 <input type="text" id="chat-input" placeholder="Ask a question..." class="w-full bg-[#111622] border border-slate-800 px-2.5 py-1.5 text-xs text-white focus:outline-none rounded">
@@ -194,7 +160,7 @@
         &copy; VeloClient Protocol. All rights reserved.
     </footer>
 
-    <!-- ================= SCRIPT ================= -->
+    <!-- SCRIPT -->
     <script>
         const validKeys = ["VELO-PRO-2026", "ENTERPRISE-VIP", "VELOCLIENT-FOUNDER", "VELO-199-STD"];
 
@@ -272,7 +238,7 @@
                 const aiMsg = document.createElement('div');
                 aiMsg.className = "bg-[#161d2d] p-2 border border-slate-800 text-slate-300 rounded";
                 if(txt.includes('price') || txt.includes('cost') || txt.includes('199')) {
-                    aiMsg.innerText = "We offer two tiers: our Standard license at $199 and the Enterprise Lifetime tier at $10,000.";
+                    aiMsg.innerText = "You can view our complete pricing tiers by visiting the Pricing page in the navigation.";
                 } else if(txt.includes('device') || txt.includes('limit') || txt.includes('3')) {
                     aiMsg.innerText = "Each license key allows secure activation across up to 3 separate devices.";
                 } else {
